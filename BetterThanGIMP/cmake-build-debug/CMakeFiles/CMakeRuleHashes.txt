@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+9aa0710a55e274ed4640e525059f104c CMakeFiles/BetterThanGIMP_autogen

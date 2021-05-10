@@ -1,0 +1,5 @@
+/home/yakiimo/CLion/clion-2021.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/yakiimo/CLionProjects/BetterThanGIMP
+-- Found OpenCV: /usr/local (found version "4.5.2") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug

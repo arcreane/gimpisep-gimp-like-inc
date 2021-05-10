@@ -1,0 +1,4 @@
+/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir
+/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP_autogen.dir
