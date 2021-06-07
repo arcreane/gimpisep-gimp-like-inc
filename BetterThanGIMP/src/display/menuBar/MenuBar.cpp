@@ -31,7 +31,7 @@ MenuBar::MenuBar(Workspace *workspace){
     QAction *undoAction = editMenu->addAction("Undo");
     QAction *redoAction = editMenu->addAction("Redo");
     QAction *resizeAction = editMenu->addAction("Resize");
-    QMenu *filterMenu = this->addMenu(("&Filter"));
+    QMenu *filterMenu = this->addMenu(("&ImageManipulation"));
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
 
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
@@ -59,12 +59,10 @@ void MenuBar::openFile(){
 }
 
 void MenuBar::monochrome(){
-    cv::Mat gray_image = image_to_gray(this->workspace->workspaceImage);
-    emit applyFilterImage(gray_image);
+    emit applyFilterImage(image_to_gray(this->workspace->workspaceImage));
 }
 
 void MenuBar::contrast(){
-    cv:: Mat bright_image = image_to_bright(this->workspace->workspaceImage);
-    emit applyFilterImage(bright_image);
+    emit applyFilterImage(image_to_bright(this->workspace->workspaceImage));
 }
 

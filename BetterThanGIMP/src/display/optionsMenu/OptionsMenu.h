@@ -11,7 +11,14 @@
 class OptionsMenu : public QWidget {
 public:
     OptionsMenu();
+
+public slots:
+    void setValue(int);
 };
+
+
+
+
 
 
 #endif //BETTERTHANGIMP_OPTIONSMENU_H

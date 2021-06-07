@@ -17,8 +17,8 @@ Window::Window() {
     optionsMenu = new OptionsMenu();
     toolMenu = new ToolMenu();
 
-    connect(mainMenu, &MenuBar::updateWindowImage, this, &Window::loadImage);
-    connect(workspace, &Workspace::updateWindowImage, this, &Window::loadImage);
+    connect(mainMenu, &MenuBar::updateWindowImage, this, &Window::loadImageFromString);
+    connect(workspace, &Workspace::updateWindowImage, this, &Window::loadImageFromString);
     connect(mainMenu, &MenuBar::applyFilterImage, this, &Window::loadImage);
     /*
     QStatusBar *statusBar = new QStatusBar(nullptr);
@@ -36,7 +36,7 @@ Window::Window() {
     this->show();
 }
 
-void Window::loadImage(QString path) {
+void Window::loadImageFromString(QString path) {
     if (path.size() > 0) {
         std::string filePath = path.toUtf8().constData();
         std::cout << filePath << std::endl;
@@ -60,6 +60,7 @@ void Window::loadImage(cv::Mat image) {
         error.setText("An error has occured");
         error.exec();
     } else {
+        this->image = image;
         workspace->updateImage(this->image);
     }
 }

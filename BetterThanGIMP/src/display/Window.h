@@ -24,7 +24,7 @@ private:
     Workspace *workspace;
     OptionsMenu *optionsMenu;
     cv::Mat image;
-    void loadImage(QString);
+    void loadImageFromString(QString);
     void loadImage(cv::Mat);
 
 public:

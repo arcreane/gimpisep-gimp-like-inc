@@ -1,0 +1,14 @@
+//
+// Created by yakiimo on 6/7/21.
+//
+
+#ifndef BETTERTHANGIMP_IMAGEMANIPULATION_H
+#define BETTERTHANGIMP_IMAGEMANIPULATION_H
+
+
+class ImageManipulation {
+
+};
+
+
+#endif //BETTERTHANGIMP_IMAGEMANIPULATION_H
