@@ -26,7 +26,6 @@ public slots :
     void closeApplication();
     void openFile();
     void monochrome();
-    void contrast();
 };
 
 

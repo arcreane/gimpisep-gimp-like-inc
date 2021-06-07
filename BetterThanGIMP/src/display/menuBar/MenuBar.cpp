@@ -6,8 +6,7 @@
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
-#include "../../filters/gray_image.cpp"
-#include "../../filters/contrast_image.cpp"
+#include "../../manipulations/monochrome.cpp"
 
 #include "MenuBar.h"
 
@@ -31,14 +30,16 @@ MenuBar::MenuBar(Workspace *workspace){
     QAction *undoAction = editMenu->addAction("Undo");
     QAction *redoAction = editMenu->addAction("Redo");
     QAction *resizeAction = editMenu->addAction("Resize");
-    QMenu *filterMenu = this->addMenu(("&ImageManipulation"));
+
+
+    QMenu *filterMenu = this->addMenu(("&Transformation"));
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
 
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
     connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
 
     QAction *contrastAction = filterMenu->addAction("Contrast");
-    connect(contrastAction, &QAction::triggered, this, &MenuBar::contrast);
+    //connect(contrastAction, SLOT(triggered()), this, SLOT(applyTransformation(image_to_bright)));
 
     QAction *expositionAction = filterMenu->addAction("Exposition");
     QAction *erosionAction = filterMenu->addAction("Erosion");
@@ -62,7 +63,5 @@ void MenuBar::monochrome(){
     emit applyFilterImage(image_to_gray(this->workspace->workspaceImage));
 }
 
-void MenuBar::contrast(){
-    emit applyFilterImage(image_to_bright(this->workspace->workspaceImage));
-}
+
 
