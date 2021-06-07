@@ -15,7 +15,7 @@ bool checkBlackColumn(const Mat &gray_image, int x, const Rect &outputRect);
 
 
 /* Cree un panorama a partir d'un vecteur d'images */
-cv::Mat panorama(vector<Mat> images_to_stitch) {
+Mat panorama(vector<Mat> images_to_stitch) {
 
     // Initialise le panorama qui sera le resultat
     Mat panorama;
