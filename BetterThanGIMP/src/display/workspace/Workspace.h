@@ -18,6 +18,8 @@ public:
     void updateImage(cv::Mat);
     void dropEvent(QDropEvent* event) override;
     void dragEnterEvent(QDragEnterEvent* event) override;
+    cv::Mat workspaceImage;
+
 public:signals:
     void updateWindowImage(QString string);
 };

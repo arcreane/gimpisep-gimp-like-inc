@@ -7,6 +7,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
 #include "../../filters/gray_image.cpp"
+#include "../../filters/contrast_image.cpp"
 
 #include "MenuBar.h"
 
@@ -34,12 +35,15 @@ MenuBar::MenuBar(Workspace *workspace){
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
 
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
-    //connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
+    connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
 
     QAction *contrastAction = filterMenu->addAction("Contrast");
+    connect(contrastAction, &QAction::triggered, this, &MenuBar::contrast);
+
     QAction *expositionAction = filterMenu->addAction("Exposition");
     QAction *erosionAction = filterMenu->addAction("Erosion");
     QAction *brightnessAction = filterMenu->addAction("Brightness");
+    //connect(brightnessAction, &QAction::triggered, this, &MenuBar::brightness);
     QAction *blurAction = filterMenu->addAction("Blur");
     QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");
 }
@@ -54,6 +58,13 @@ void MenuBar::openFile(){
     emit updateWindowImage(path);
 }
 
-cv::Mat MenuBar::monochrome(cv::Mat image){
-    return image_to_gray(image);
+void MenuBar::monochrome(){
+    cv::Mat gray_image = image_to_gray(this->workspace->workspaceImage);
+    emit applyFilterImage(gray_image);
 }
+
+void MenuBar::contrast(){
+    cv:: Mat bright_image = image_to_bright(this->workspace->workspaceImage);
+    emit applyFilterImage(bright_image);
+}
+

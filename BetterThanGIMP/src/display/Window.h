@@ -25,6 +25,7 @@ private:
     OptionsMenu *optionsMenu;
     cv::Mat image;
     void loadImage(QString);
+    void loadImage(cv::Mat);
 
 public:
     Window();

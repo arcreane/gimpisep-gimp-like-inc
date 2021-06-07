@@ -20,6 +20,9 @@ void Workspace::updateImage(cv::Mat image){
             .scaled(this->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     this->setPixmap(QPixmap::fromImage(qImage));
+    this->workspaceImage = tmp;
+    // Crée une image temporaire à partir du QPixmap affiché, récupérer data, taille etc.
+    // Lui appliquer la transformation
 
     //this->setScaledContents(true);
     //this->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );

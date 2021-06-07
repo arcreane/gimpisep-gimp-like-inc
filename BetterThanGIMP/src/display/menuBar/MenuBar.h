@@ -14,15 +14,19 @@ class MenuBar : public QMenuBar {
 
 private:
     Workspace *workspace;
+
 public:
     MenuBar(Workspace *workspace);
-public:signals:
+
+signals:
     void updateWindowImage(QString string);
+    void applyFilterImage(cv::Mat image);
 
 public slots :
     void closeApplication();
     void openFile();
-    cv::Mat monochrome(cv::Mat image);
+    void monochrome();
+    void contrast();
 };
 
 
