@@ -3,3 +3,7 @@
 //
 
 #include "OptionsMenu.h"
+
+OptionsMenu::OptionsMenu(){
+    this->setStyleSheet("QWidget{background-color: green;}");
+}

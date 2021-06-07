@@ -8,11 +8,18 @@
 
 #include <opencv2/core/mat.hpp>
 #include <QLabel>
+#include <QDropEvent>
+#include <QDragEnterEvent>
 
 class Workspace : public QLabel {
+    Q_OBJECT
 public:
     Workspace();
     void updateImage(cv::Mat);
+    void dropEvent(QDropEvent* event) override;
+    void dragEnterEvent(QDragEnterEvent* event) override;
+public:signals:
+    void updateWindowImage(QString string);
 };
 
 

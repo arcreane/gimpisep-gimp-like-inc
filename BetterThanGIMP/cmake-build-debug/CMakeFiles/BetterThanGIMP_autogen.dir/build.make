@@ -62,10 +62,10 @@ RM = /home/yakiimo/CLion/clion-2021.1.1/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/yakiimo/CLionProjects/BetterThanGIMP
+CMAKE_SOURCE_DIR = /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug
+CMAKE_BINARY_DIR = /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug
 
 # Utility rule file for BetterThanGIMP_autogen.
 
@@ -73,8 +73,8 @@ CMAKE_BINARY_DIR = /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug
 include CMakeFiles/BetterThanGIMP_autogen.dir/progress.make
 
 CMakeFiles/BetterThanGIMP_autogen:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target BetterThanGIMP"
-	/home/yakiimo/CLion/clion-2021.1.1/bin/cmake/linux/bin/cmake -E cmake_autogen /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP_autogen.dir/AutogenInfo.json Debug
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target BetterThanGIMP"
+	/home/yakiimo/CLion/clion-2021.1.1/bin/cmake/linux/bin/cmake -E cmake_autogen /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP_autogen.dir/AutogenInfo.json Debug
 
 BetterThanGIMP_autogen: CMakeFiles/BetterThanGIMP_autogen
 BetterThanGIMP_autogen: CMakeFiles/BetterThanGIMP_autogen.dir/build.make
@@ -91,6 +91,6 @@ CMakeFiles/BetterThanGIMP_autogen.dir/clean:
 .PHONY : CMakeFiles/BetterThanGIMP_autogen.dir/clean
 
 CMakeFiles/BetterThanGIMP_autogen.dir/depend:
-	cd /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/yakiimo/CLionProjects/BetterThanGIMP /home/yakiimo/CLionProjects/BetterThanGIMP /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP_autogen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP_autogen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/BetterThanGIMP_autogen.dir/depend
 

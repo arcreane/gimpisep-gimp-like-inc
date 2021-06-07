@@ -16,10 +16,13 @@ private:
     Workspace *workspace;
 public:
     MenuBar(Workspace *workspace);
+public:signals:
+    void updateWindowImage(QString string);
 
 public slots :
     void closeApplication();
     void openFile();
+    cv::Mat monochrome(cv::Mat image);
 };
 
 

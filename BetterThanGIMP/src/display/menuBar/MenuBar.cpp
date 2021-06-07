@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
+#include "../../filters/gray_image.cpp"
 
 #include "MenuBar.h"
 
@@ -31,7 +32,10 @@ MenuBar::MenuBar(Workspace *workspace){
     QAction *resizeAction = editMenu->addAction("Resize");
     QMenu *filterMenu = this->addMenu(("&Filter"));
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
+
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
+    //connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
+
     QAction *contrastAction = filterMenu->addAction("Contrast");
     QAction *expositionAction = filterMenu->addAction("Exposition");
     QAction *erosionAction = filterMenu->addAction("Erosion");
@@ -47,13 +51,9 @@ void MenuBar::closeApplication(){
 void MenuBar::openFile(){
     QString path;
     path = QFileDialog::getOpenFileName(workspace, "Open file", "/", "Image Files (*.png *gif * jpg *bmp *jpeg * jfif)");
-    std::string filePath = path.toUtf8().constData();
-    std::cout << filePath << std::endl;
-    cv::Mat image = cv::imread(filePath);
-    if (!image.data){
-        std::cout << "Error loading image" << std::endl;
-        exit(-1);
-    }
-    workspace->updateImage(image);
+    emit updateWindowImage(path);
+}
 
+cv::Mat MenuBar::monochrome(cv::Mat image){
+    return image_to_gray(image);
 }

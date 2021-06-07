@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp" "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o"
-  "/home/yakiimo/CLionProjects/BetterThanGIMP/src/display/Window.cpp" "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o"
-  "/home/yakiimo/CLionProjects/BetterThanGIMP/src/display/menuBar/MenuBar.cpp" "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o"
-  "/home/yakiimo/CLionProjects/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp" "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o"
-  "/home/yakiimo/CLionProjects/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp" "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o"
-  "/home/yakiimo/CLionProjects/BetterThanGIMP/src/display/workspace/Workspace.cpp" "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o"
-  "/home/yakiimo/CLionProjects/BetterThanGIMP/src/main.cpp" "/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o"
+  "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp" "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o"
+  "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/Window.cpp" "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o"
+  "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/menuBar/MenuBar.cpp" "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o"
+  "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp" "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o"
+  "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp" "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o"
+  "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/workspace/Workspace.cpp" "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o"
+  "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/main.cpp" "/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

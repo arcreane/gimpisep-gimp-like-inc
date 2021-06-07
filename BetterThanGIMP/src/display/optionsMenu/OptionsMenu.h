@@ -6,8 +6,11 @@
 #define BETTERTHANGIMP_OPTIONSMENU_H
 
 
-class OptionsMenu {
+#include <QWidget>
 
+class OptionsMenu : public QWidget {
+public:
+    OptionsMenu();
 };
 
 

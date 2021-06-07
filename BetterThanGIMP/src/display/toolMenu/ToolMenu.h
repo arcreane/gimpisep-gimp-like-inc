@@ -6,8 +6,11 @@
 #define BETTERTHANGIMP_TOOLMENU_H
 
 
-class ToolMenu {
+#include <QWidget>
 
+class ToolMenu : public QWidget {
+public:
+    ToolMenu();
 };
 
 

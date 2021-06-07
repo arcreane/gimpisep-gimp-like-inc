@@ -13,8 +13,9 @@
 #include "workspace/Workspace.h"
 #include "optionsMenu/OptionsMenu.h"
 #include "menuBar/MenuBar.h"
+#include <opencv2/opencv.hpp>
 
-class Window : public QMainWindow {
+class Window : public QWidget {
 Q_OBJECT
 private:
     QGridLayout *layout;
@@ -22,6 +23,8 @@ private:
     ToolMenu *toolMenu;
     Workspace *workspace;
     OptionsMenu *optionsMenu;
+    cv::Mat image;
+    void loadImage(QString);
 
 public:
     Window();

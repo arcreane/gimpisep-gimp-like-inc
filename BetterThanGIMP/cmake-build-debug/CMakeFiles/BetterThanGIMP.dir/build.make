@@ -62,10 +62,10 @@ RM = /home/yakiimo/CLion/clion-2021.1.1/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/yakiimo/CLionProjects/BetterThanGIMP
+CMAKE_SOURCE_DIR = /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug
+CMAKE_BINARY_DIR = /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/BetterThanGIMP.dir/depend.make
@@ -78,94 +78,94 @@ include CMakeFiles/BetterThanGIMP.dir/flags.make
 
 CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o: CMakeFiles/BetterThanGIMP.dir/flags.make
 CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o: BetterThanGIMP_autogen/mocs_compilation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o -c /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.o -c /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp
 
 CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp > CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp > CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.i
 
 CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp -o CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/BetterThanGIMP_autogen/mocs_compilation.cpp -o CMakeFiles/BetterThanGIMP.dir/BetterThanGIMP_autogen/mocs_compilation.cpp.s
 
 CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o: CMakeFiles/BetterThanGIMP.dir/flags.make
 CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o -c /home/yakiimo/CLionProjects/BetterThanGIMP/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/main.cpp.o -c /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/main.cpp
 
 CMakeFiles/BetterThanGIMP.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BetterThanGIMP.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/BetterThanGIMP/src/main.cpp > CMakeFiles/BetterThanGIMP.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/main.cpp > CMakeFiles/BetterThanGIMP.dir/src/main.cpp.i
 
 CMakeFiles/BetterThanGIMP.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BetterThanGIMP.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/BetterThanGIMP/src/main.cpp -o CMakeFiles/BetterThanGIMP.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/main.cpp -o CMakeFiles/BetterThanGIMP.dir/src/main.cpp.s
 
 CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o: CMakeFiles/BetterThanGIMP.dir/flags.make
 CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o: ../src/display/Window.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o -c /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/Window.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.o -c /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/Window.cpp
 
 CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/Window.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/Window.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.i
 
 CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/Window.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/Window.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/Window.cpp.s
 
 CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o: CMakeFiles/BetterThanGIMP.dir/flags.make
 CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o: ../src/display/workspace/Workspace.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o -c /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/workspace/Workspace.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.o -c /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/workspace/Workspace.cpp
 
 CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/workspace/Workspace.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/workspace/Workspace.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.i
 
 CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/workspace/Workspace.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/workspace/Workspace.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/workspace/Workspace.cpp.s
 
 CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o: CMakeFiles/BetterThanGIMP.dir/flags.make
 CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o: ../src/display/toolMenu/ToolMenu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o -c /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.o -c /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp
 
 CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.i
 
 CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/toolMenu/ToolMenu.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/toolMenu/ToolMenu.cpp.s
 
 CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o: CMakeFiles/BetterThanGIMP.dir/flags.make
 CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o: ../src/display/optionsMenu/OptionsMenu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o -c /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.o -c /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp
 
 CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.i
 
 CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/optionsMenu/OptionsMenu.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/optionsMenu/OptionsMenu.cpp.s
 
 CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o: CMakeFiles/BetterThanGIMP.dir/flags.make
 CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o: ../src/display/menuBar/MenuBar.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o -c /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/menuBar/MenuBar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.o -c /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/menuBar/MenuBar.cpp
 
 CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/menuBar/MenuBar.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/menuBar/MenuBar.cpp > CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.i
 
 CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/BetterThanGIMP/src/display/menuBar/MenuBar.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/src/display/menuBar/MenuBar.cpp -o CMakeFiles/BetterThanGIMP.dir/src/display/menuBar/MenuBar.cpp.s
 
 # Object files for target BetterThanGIMP
 BetterThanGIMP_OBJECTS = \
@@ -245,7 +245,7 @@ BetterThanGIMP: /usr/local/lib/libopencv_core.so.4.5.2
 BetterThanGIMP: /opt/Qt5.12.10/5.12.10/gcc_64/lib/libQt5Gui.so.5.12.10
 BetterThanGIMP: /opt/Qt5.12.10/5.12.10/gcc_64/lib/libQt5Core.so.5.12.10
 BetterThanGIMP: CMakeFiles/BetterThanGIMP.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable BetterThanGIMP"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable BetterThanGIMP"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BetterThanGIMP.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -258,6 +258,6 @@ CMakeFiles/BetterThanGIMP.dir/clean:
 .PHONY : CMakeFiles/BetterThanGIMP.dir/clean
 
 CMakeFiles/BetterThanGIMP.dir/depend:
-	cd /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/yakiimo/CLionProjects/BetterThanGIMP /home/yakiimo/CLionProjects/BetterThanGIMP /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug /home/yakiimo/CLionProjects/gimpisep-gimp-like-inc/BetterThanGIMP/cmake-build-debug/CMakeFiles/BetterThanGIMP.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/BetterThanGIMP.dir/depend
 
