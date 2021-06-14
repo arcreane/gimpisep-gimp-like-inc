@@ -12,16 +12,25 @@
 #include <QDragEnterEvent>
 
 class Workspace : public QLabel {
-    Q_OBJECT
+Q_OBJECT
+private:
+    cv::Mat &currentImage;
 public:
-    Workspace();
-    void updateImage(cv::Mat);
-    void dropEvent(QDropEvent* event) override;
-    void dragEnterEvent(QDragEnterEvent* event) override;
-    cv::Mat workspaceImage;
+    Workspace(cv::Mat &);
 
-public:signals:
-    void updateWindowImage(QString string);
+    void updateImageDisplay();
+
+    void updateImageDisplay(cv::Mat);
+
+    void dropEvent(QDropEvent *) override;
+
+    void dragEnterEvent(QDragEnterEvent *) override;
+
+public:
+signals:
+    void onDropEmitFilePath(QString);
+
+
 };
 
 

@@ -4,16 +4,21 @@
 
 #include <QSlider>
 #include <iostream>
+#include <QLayoutItem>
+#include <QLabel>
 #include "OptionsMenu.h"
 
-OptionsMenu::OptionsMenu(){
-    this->setStyleSheet("QWidget{background-color: green;}");
-    QSlider *slider = new QSlider(Qt::Horizontal,this);
-    slider->setRange(0,100);
-    slider->setValue(50);
-    connect(slider, &QSlider::valueChanged, this, &OptionsMenu::setValue);
+OptionsMenu::OptionsMenu() {
+    layout = new QGridLayout(this);
+    this->currentOptions = new QWidget();
+    this->setStyleSheet("QWidget{background-color: orange;}");
+    this->layout->addWidget(new QLabel("Some useful options:"));
+    this->layout->addWidget(currentOptions);
 }
 
-void OptionsMenu::setValue(int i){
-    std::cout << i << std::endl;
+void OptionsMenu::setOptions(QWidget *options) {
+    this->layout->removeWidget(currentOptions);
+    delete this->currentOptions;
+    this->currentOptions = options;
+    this->layout->addWidget(currentOptions);
 }

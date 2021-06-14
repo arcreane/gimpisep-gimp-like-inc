@@ -8,24 +8,27 @@
 
 #include <QMenuBar>
 #include "../workspace/Workspace.h"
+#include "../../manipulations/Manipulation.h"
 
 class MenuBar : public QMenuBar {
-    Q_OBJECT
+Q_OBJECT
 
 private:
-    Workspace *workspace;
+    Workspace &workspace;
 
 public:
-    MenuBar(Workspace *workspace);
+    MenuBar(Workspace &);
 
+public:
 signals:
-    void updateWindowImage(QString string);
-    void applyFilterImage(cv::Mat image);
+
+    void onOpenEmitFilePath(QString);
+    void newManipulationSelected(Manipulation *);
+    void saveOnDisk();
 
 public slots :
     void closeApplication();
     void openFile();
-    void monochrome();
 };
 
 
