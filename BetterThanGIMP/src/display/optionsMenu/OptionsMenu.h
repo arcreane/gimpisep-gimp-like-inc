@@ -7,13 +7,16 @@
 
 
 #include <QWidget>
+#include <QGridLayout>
 
 class OptionsMenu : public QWidget {
 public:
     OptionsMenu();
+    void setOptions(QWidget*);
 
-public slots:
-    void setValue(int);
+private:
+    QGridLayout *layout;
+    QWidget* currentOptions;
 };
 
 
