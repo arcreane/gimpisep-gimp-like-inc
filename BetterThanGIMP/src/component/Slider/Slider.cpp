@@ -7,6 +7,8 @@
 #include "Slider.h"
 
 Slider::Slider(QString name, int min, int max, int defaultValue, int defaultOffset) {
+    QLabel *sliderTitle = new QLabel(name);
+
     this->slider = new QSlider(Qt::Vertical);
     this->slider->setRange(min, max);
     this->slider->setValue(defaultValue + defaultOffset);
@@ -15,11 +17,12 @@ Slider::Slider(QString name, int min, int max, int defaultValue, int defaultOffs
 
     this->setLayout(new QVBoxLayout());
 
-    this->layout()->addWidget(new QLabel(name));
+    this->layout()->addWidget(sliderTitle);
+    this->layout()->setAlignment(sliderTitle, Qt::AlignHCenter);
     this->layout()->addWidget(this->slider);
+    this->layout()->setAlignment(this->slider, Qt::AlignHCenter);
     this->layout()->addWidget(this->currentValue);
-
-    this->layout()->setAlignment(Qt::AlignHCenter);
+    this->layout()->setAlignment(this->currentValue, Qt::AlignHCenter);
 }
 
 QSlider *Slider::getSlider() {
