@@ -53,24 +53,32 @@ void Window::loadImageFromString(QString path) {
 }
 
 void Window::setCurrentManipulation(Manipulation *manipulation) {
-    if (!this->image.empty()) {
-        if (currentManipulation != nullptr) {
-            this->image = currentManipulation->applyManipulation();
-            delete this->currentManipulation;
+
+    if (!this->image.empty() || manipulation->getName() == "Panorama" || currentManipulation) {
+
+        if (!this->image.empty()) {
+            if (currentManipulation != nullptr) {
+                this->image = currentManipulation->applyManipulation();
+                delete this->currentManipulation;
+            }
+
+            if (!this->image.empty()) {
+                workspace->updateImageDisplay();
+            }
+
+            std::cout << manipulation->getName() << std::endl;
+            this->manipulationOptionsMenu->setOptions(manipulation->getOptions());
+
+            this->currentManipulation = manipulation;
+            this->currentManipulation->setCurrentImage(this->image);
+
+        } else {
+
+            std::cout << "Error loading image" << std::endl;
+            QMessageBox error;
+            error.setText("Can't perform requested manipulation on an empty image!");
+            error.exec();
         }
-
-        std::cout << manipulation->getName() << std::endl;
-        this->manipulationOptionsMenu->setOptions(manipulation->getOptions());
-
-        workspace->updateImageDisplay();
-
-        this->currentManipulation = manipulation;
-        this->currentManipulation->setCurrentImage(this->image);
-    } else {
-        std::cout << "Error loading image" << std::endl;
-        QMessageBox error;
-        error.setText("Can't perform requested manipulation on an empty image!");
-        error.exec();
     }
 }
 

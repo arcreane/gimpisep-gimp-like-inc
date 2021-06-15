@@ -10,6 +10,7 @@
 #include "MenuBar.h"
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
+#include "../../manipulations/Panorama/Panorama.h"
 
 MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
@@ -42,6 +43,11 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 //    connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
     connect(monochromeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Monochrome(this->workspace));
+    });
+
+    QAction *panoramaAction = filterMenu->addAction("Panorama");
+    connect(panoramaAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Panorama(this->workspace));
     });
 
     QAction *contrastAction = filterMenu->addAction("Contrast");
