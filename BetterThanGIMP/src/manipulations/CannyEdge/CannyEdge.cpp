@@ -4,9 +4,9 @@
 
 #include <opencv2/opencv.hpp>
 #include <QSlider>
-#include <QGridLayout>
-#include <QPushButton>
+#include <QHBoxLayout>
 #include "CannyEdge.h"
+#include "../../component/Slider/Slider.h"
 
 using namespace cv;
 
@@ -14,33 +14,34 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     this->name = "Canny edge";
     this->options->setLayout(new QHBoxLayout());
 
+    //We initialize our parameters
     this->threshold1 = 0;
     this->threshold2 = 0;
-    this->kernelSize = 1;
+    this->kernelSize = 0;
 
-    QSlider *sliderThreshold1 = new QSlider(Qt::Vertical, this->options);
-    QObject::connect(sliderThreshold1, &QSlider::valueChanged, this, [this](int val) {
+    Slider *sliderThreshold1 = new Slider("Threshold 1", 0, 1000, this->threshold1);
+    connect(sliderThreshold1->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold1](int val) {
         this->threshold1 = val;
+        sliderThreshold1->setCurrentValue(this->threshold1);
         updateImageDisplay();
     });
-    sliderThreshold1->setRange(0, 1000);
     this->options->layout()->addWidget(sliderThreshold1);
 
-    QSlider *sliderThreshold2 = new QSlider(Qt::Vertical, this->options);
-    QObject::connect(sliderThreshold2, &QSlider::valueChanged, this, [this](int val) {
+    Slider *sliderThreshold2 = new Slider("Threshold 2", 0, 1000, this->threshold2);
+    connect(sliderThreshold2->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold2](int val) {
         this->threshold2 = val;
+        sliderThreshold2->setCurrentValue(this->threshold2);
         updateImageDisplay();
     });
-    sliderThreshold1->setRange(0, 1000);
     this->options->layout()->addWidget(sliderThreshold2);
 
-    QSlider *sliderKernelSize = new QSlider(Qt::Vertical, this->options);
-    QObject::connect(sliderKernelSize, &QSlider::valueChanged, this, [this](int val) {
-        val = val * 2 + 1;
+    Slider *sliderKernelSize = new Slider("Blur Kernel Size", -1, 10, this->kernelSize, -1);
+    connect(sliderKernelSize->getSlider(), &QSlider::valueChanged, this, [this, sliderKernelSize](int val) {
+        val = val < 0 ? 0 : val * 2 + 1;
         this->kernelSize = val;
+        sliderKernelSize->setCurrentValue(this->kernelSize);
         updateImageDisplay();
     });
-    sliderKernelSize->setRange(0, 10);
     this->options->layout()->addWidget(sliderKernelSize);
 
 
@@ -50,7 +51,11 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
 Mat CannyEdge::cannyEdge(Mat &image, int threshold1, int threshold2, int kernelSize) {
     Mat result, grey, blur;
     cvtColor(image, grey, COLOR_BGR2GRAY);
-    GaussianBlur(grey, blur, Size(kernelSize, kernelSize), 0);
+    if (kernelSize > 0) {
+        GaussianBlur(grey, blur, Size(kernelSize, kernelSize), 0);
+    } else {
+        blur = grey;
+    }
     Canny(blur, result, threshold1, threshold2);
     return result;
 }
