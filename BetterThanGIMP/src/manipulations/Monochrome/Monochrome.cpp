@@ -16,19 +16,11 @@ Monochrome::Monochrome(Workspace &w) : Manipulation(w) {
     this->options->setLayout(new QVBoxLayout());
 
     QPushButton *convertToGrey = new QPushButton(tr("Grey"));
-    connect(convertToGrey, &QPushButton::pressed, this, [this]() {
-        this->transform = COLOR_BGR2GRAY;
-        if (this->currentImage.channels() < 3) {
-            std::cout << "Error loading image" << std::endl;
-            QMessageBox error;
-            error.setText("Can't perform requested manipulation on the current image!");
-            error.exec();
-        } else {
-            updateImageDisplay();
-        }
 
+    connect(convertToGrey, &QPushButton::released, this, [this]() {
+        this->transform = COLOR_BGR2GRAY;
+        updateImageDisplay();
     });
-//    convertToGrey->setEnabled(this->currentImage.channels() == 3);
     this->options->layout()->addWidget(convertToGrey);
 
     QPushButton *switchBlueAndRed = new QPushButton(tr("Switch blue and red"));
@@ -45,8 +37,14 @@ Monochrome::Monochrome(Workspace &w) : Manipulation(w) {
 
 
 Mat Monochrome::applyManipulation() {
+    if (this->currentImage.channels() < 3 && this->transform == COLOR_BGR2GRAY) {
+        QMessageBox error;
+        error.setText("Can't perform requested manipulation on the current image!");
+        error.exec();
+        return this->currentImage;
+    }
+
     Mat result;
-    std::cout << this->currentImage.channels() << std::endl;
     cvtColor(this->currentImage, result, this->transform);
     return result;
 }
