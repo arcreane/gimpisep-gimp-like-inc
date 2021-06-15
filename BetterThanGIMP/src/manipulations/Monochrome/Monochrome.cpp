@@ -16,7 +16,6 @@ Monochrome::Monochrome(Workspace &w) : Manipulation(w) {
     this->options->setLayout(new QVBoxLayout());
 
     QPushButton *convertToGrey = new QPushButton(tr("Grey"));
-
     connect(convertToGrey, &QPushButton::released, this, [this]() {
         this->transform = COLOR_BGR2GRAY;
         updateImageDisplay();
@@ -38,9 +37,6 @@ Monochrome::Monochrome(Workspace &w) : Manipulation(w) {
 
 Mat Monochrome::applyManipulation() {
     if (this->currentImage.channels() < 3 && this->transform == COLOR_BGR2GRAY) {
-        QMessageBox error;
-        error.setText("Can't perform requested manipulation on the current image!");
-        error.exec();
         return this->currentImage;
     }
 
