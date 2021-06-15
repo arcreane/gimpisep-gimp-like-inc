@@ -46,6 +46,10 @@ void Window::loadImageFromString(QString path) {
             error.setText("An error has occured");
             error.exec();
         } else {
+           if(currentManipulation){
+               delete this->currentManipulation;
+               this->manipulationOptionsMenu->removeOptions();
+           }
             temp.copyTo(this->image);
             workspace->updateImageDisplay();
         }
@@ -53,19 +57,19 @@ void Window::loadImageFromString(QString path) {
 }
 
 void Window::setCurrentManipulation(Manipulation *manipulation) {
-    if (!this->image.empty()) {
-        if (currentManipulation != nullptr) {
-            this->image = currentManipulation->applyManipulation();
-            delete this->currentManipulation;
-        }
-
-        std::cout << manipulation->getName() << std::endl;
-        this->manipulationOptionsMenu->setOptions(manipulation->getOptions());
-
+    if (currentManipulation) {
+        this->image = currentManipulation->getImageModified();
+        delete this->currentManipulation;
         workspace->updateImageDisplay();
+    }
+
+    if (!this->image.empty()) {
+        std::cout << manipulation->getName() << std::endl;
+        this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
+                                                  QString::fromUtf8(manipulation->getName().c_str()));
 
         this->currentManipulation = manipulation;
-        this->currentManipulation->setCurrentImage(this->image);
+        this->currentManipulation->setImageSavedInMemory(this->image);
     } else {
         std::cout << "Error loading image" << std::endl;
         QMessageBox error;
