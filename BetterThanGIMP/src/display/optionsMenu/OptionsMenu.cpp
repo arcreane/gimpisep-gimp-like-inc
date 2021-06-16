@@ -13,7 +13,7 @@ OptionsMenu::OptionsMenu() {
     this->currentOptions = new QWidget();
 
     this->title = new QLabel("There is no manipulation for the moment...");
-
+    this->title->setAlignment(Qt::AlignCenter);
 
     this->layout->addWidget(this->title);
     this->layout->addWidget(currentOptions);

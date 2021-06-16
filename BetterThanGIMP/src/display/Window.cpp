@@ -31,7 +31,7 @@ Window::Window() {
     layout->addWidget(workspace, 0, 1, 0, 3);
     layout->addWidget(manipulationOptionsMenu, 0, 4);
 
-    this->setMinimumSize(1280, 720);
+    this->setMinimumSize(1600, 720);
     this->show();
 }
 

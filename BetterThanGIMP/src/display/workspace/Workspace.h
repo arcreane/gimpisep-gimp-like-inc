@@ -26,6 +26,8 @@ public:
 
     void dragEnterEvent(QDragEnterEvent *) override;
 
+    void resizeEvent(QResizeEvent *) override;
+
 public:
 signals:
     void onDropEmitFilePath(QString);
