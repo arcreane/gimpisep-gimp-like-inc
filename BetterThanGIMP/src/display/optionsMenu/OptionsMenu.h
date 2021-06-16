@@ -12,16 +12,15 @@
 class OptionsMenu : public QWidget {
 public:
     OptionsMenu();
-    void setOptions(QWidget*);
+
+    void setOptions(QWidget *, QString);
+    void removeOptions();
 
 private:
-    QGridLayout *layout;
-    QWidget* currentOptions;
+    QVBoxLayout *layout;
+    QWidget *currentOptions;
+    QLabel *title;
 };
-
-
-
-
 
 
 #endif //BETTERTHANGIMP_OPTIONSMENU_H

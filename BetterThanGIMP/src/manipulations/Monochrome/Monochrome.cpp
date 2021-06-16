@@ -36,11 +36,11 @@ Monochrome::Monochrome(Workspace &w) : Manipulation(w) {
 
 
 Mat Monochrome::applyManipulation() {
-    if (this->currentImage.channels() < 3 && this->transform == COLOR_BGR2GRAY) {
-        return this->currentImage;
+    if (this->imageSavedInMemory.channels() < 3 && this->transform == COLOR_BGR2GRAY) {
+        return this->imageSavedInMemory;
     }
 
     Mat result;
-    cvtColor(this->currentImage, result, this->transform);
+    cvtColor(this->imageSavedInMemory, result, this->transform);
     return result;
 }
