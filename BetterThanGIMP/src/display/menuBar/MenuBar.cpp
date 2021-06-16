@@ -40,7 +40,6 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
 
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
-//    connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
     connect(monochromeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Monochrome(this->workspace));
     });
@@ -62,7 +61,6 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");
 
     QAction *cannyEdge = filterMenu->addAction("Canny Edge");
-//    connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
     connect(cannyEdge, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new CannyEdge(this->workspace));
     });

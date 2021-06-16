@@ -14,7 +14,9 @@ public:
     OptionsMenu();
 
     void setOptions(QWidget *, QString);
+
     void removeOptions();
+
 
 private:
     QVBoxLayout *layout;

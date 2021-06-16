@@ -11,17 +11,24 @@
 
 
 class Panorama : public Manipulation {
-
+Q_OBJECT
 public:
     Panorama(Workspace &);
+
     Mat applyManipulation();
 
 private:
     Mat stitch(std::vector<Mat> images_to_stitch);
-    bool crop_after_stitching(Mat& image, Mat& output);
+
+    bool crop_after_stitching(Mat &image, Mat &output);
+
     bool checkBlackRow(const Mat &gray_image, int y, const Rect &outputRect);
+
     bool checkBlackColumn(const Mat &gray_image, int x, const Rect &outputRect);
+
     void displayImagesThumbnails();
+
+    void onResize() override;
 
     bool mustBeCropped;
     QStringList paths;

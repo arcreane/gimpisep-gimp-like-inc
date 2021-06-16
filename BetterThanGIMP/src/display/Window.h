@@ -19,13 +19,14 @@
 class Window : public QWidget {
 Q_OBJECT
 private:
-    QGridLayout *layout;
+    QHBoxLayout *layout;
     MenuBar *mainMenu;
     ToolMenu *toolMenu;
     Workspace *workspace;
     OptionsMenu *manipulationOptionsMenu;
     cv::Mat image;
     Manipulation* currentManipulation;
+    void resizeEvent(QResizeEvent *e) override;
 
 private slots :
     void loadImageFromString(QString);

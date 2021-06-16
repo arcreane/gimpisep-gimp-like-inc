@@ -12,21 +12,11 @@
 #include <QString>
 #include <QLabel>
 #include <QFileDialog>
-#include <QMessageBox>
 #include <QScrollArea>
 #include "Panorama.h"
 
 using namespace std;
 using namespace cv;
-
-Mat stitch(vector<Mat> images_to_stitch);
-
-bool crop_after_stitching(Mat &image, Mat &output);
-
-bool checkBlackRow(const Mat &gray_image, int y, const Rect &outputRect);
-
-bool checkBlackColumn(const Mat &gray_image, int x, const Rect &outputRect);
-
 
 Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->name = "Panorama";
@@ -40,7 +30,7 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
         this->paths = QFileDialog::getOpenFileNames(nullptr, "Open file", "/",
                                                     "Image Files (*.png * jpg *bmp *jpeg * jfif)");
         this->images_to_stitch.clear();
-        for (int i = 0; i < paths.length(); i++){
+        for (int i = 0; i < paths.length(); i++) {
             string filePath = paths.at(i).toUtf8().constData();
             this->images_to_stitch.push_back(imread(filePath));
         }
@@ -48,9 +38,9 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
         this->options->layout()->addWidget(this->panelThumbnails);
     });
 
-    QPushButton *applyStitching = new QPushButton(tr("Stitch images"));
+    QPushButton *applyStitching = new QPushButton(tr("Stitch below images"));
     connect(applyStitching, &QPushButton::released, this, [this]() {
-        if (images_to_stitch.size() > 1){
+        if (images_to_stitch.size() > 1) {
             this->updateImageDisplay();
         } else {
             std::cout << "Can't create a panorama out of less than 2 images" << std::endl;
@@ -69,32 +59,31 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(selectFiles);
     this->options->layout()->addWidget(correctStitching);
     this->options->layout()->addWidget(applyStitching);
-    this->options->setMaximumWidth(380);
+    this->options->layout()->setMargin(0);
     this->options->setStyleSheet("QWidget{background-color: green;}");
 
 }
 
-void Panorama::displayImagesThumbnails(){
+void Panorama::displayImagesThumbnails() {
     delete this->thumbnails;
     delete this->panelThumbnails;
     this->thumbnails = new QWidget();
     this->panelThumbnails = new QScrollArea;
-    this->panelThumbnails->setMaximumWidth(380);
-    this->thumbnails->setMaximumWidth(380);
     this->thumbnails->setLayout(new QVBoxLayout());
+
     for (Mat image : this->images_to_stitch) {
         Mat tmp;
         QLabel *thumbnail = new QLabel();
-        thumbnail->setMaximumWidth(300);
+        thumbnail->setMaximumWidth(this->options->width() - 35);
         cvtColor(image, tmp, COLOR_BGR2RGB);
         QImage qImage = QImage((uchar *) tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
                 .scaled(thumbnail->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
         thumbnail->setPixmap(QPixmap::fromImage(qImage));
         this->thumbnails->layout()->addWidget(thumbnail);
-        this->thumbnails->layout()->setAlignment(thumbnail,Qt::AlignHCenter);
+        this->thumbnails->layout()->setAlignment(thumbnail, Qt::AlignHCenter);
     }
     this->panelThumbnails->setWidget(this->thumbnails);
-    this->options->update();
+
 }
 
 /* Cree un panorama a partir d'un vecteur d'images */
@@ -109,8 +98,6 @@ Mat Panorama::stitch(vector<Mat> images_to_stitch) {
 
     // Assemble les images pour creer le panorama
     Stitcher::Status status = stitcher->stitch(images_to_stitch, panorama);
-    std::cout << stitcher->estimateTransform(images_to_stitch) << std::endl;
-
     // Verifie que l'assemblage et la construction du panorama s'est bien deroule
     if (status != Stitcher::OK) {
         cout << "An error occured while stitching the images! Error: " << int(status) << endl;
@@ -120,7 +107,7 @@ Mat Panorama::stitch(vector<Mat> images_to_stitch) {
     }
 
     // Retourne le panorama resultant
-    if (this->mustBeCropped){
+    if (this->mustBeCropped) {
         crop_after_stitching(panorama, panorama_cropped);
         return panorama_cropped;
     }
@@ -224,4 +211,11 @@ bool Panorama::checkBlackColumn(const Mat &gray_image, int x, const Rect &output
 
 Mat Panorama::applyManipulation() {
     return stitch(images_to_stitch);
+}
+
+void Panorama::onResize() {
+    if (!this->images_to_stitch.empty()) {
+        displayImagesThumbnails();
+        this->options->layout()->addWidget(this->panelThumbnails);
+    }
 }

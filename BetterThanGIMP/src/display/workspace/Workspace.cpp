@@ -12,7 +12,7 @@ using namespace cv;
 Workspace::Workspace(Mat &currentImage) : currentImage(currentImage) {
     //TEMP
     this->setStyleSheet("QLabel{background-color: red; color: blue;}");
-
+    this->setAlignment(Qt::AlignCenter);
     this->setText("You can drag and drop you image here !");
     this->setAcceptDrops(true);
 }
@@ -22,7 +22,6 @@ void Workspace::updateImageDisplay() {
     cvtColor(currentImage, tmp, COLOR_BGR2RGB);
     QImage qImage = QImage((uchar *) tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
             .scaled(this->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
     this->setPixmap(QPixmap::fromImage(qImage));
 }
 
@@ -37,14 +36,11 @@ void Workspace::updateImageDisplay(Mat image) {
 
 void Workspace::dropEvent(QDropEvent *event) {
     const QMimeData *mimeData = event->mimeData();
-    std::cout << "Drop event detected" << std::endl;
     if (mimeData->hasUrls()) {
-        std::cout << "Success" << std::endl;
         emit onDropEmitFilePath(mimeData->urls().at(0).toLocalFile());
     }
 }
 
 void Workspace::dragEnterEvent(QDragEnterEvent *event) {
-    std::cout << "Drag enter event" << std::endl;
     event->accept();
 }

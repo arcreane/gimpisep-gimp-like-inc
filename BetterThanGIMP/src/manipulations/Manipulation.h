@@ -20,6 +20,8 @@ public:
 
     virtual Mat applyManipulation() = 0;
 
+    virtual void onResize();
+
     QWidget *getOptions();
 
     std::string getName();
@@ -28,6 +30,7 @@ public:
 
     void setImageSavedInMemory(Mat);
 
+    void updateImageDisplayOnWorkspace();
 
 protected:
     QWidget *options;

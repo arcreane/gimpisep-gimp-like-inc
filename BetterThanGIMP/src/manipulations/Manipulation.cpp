@@ -17,13 +17,14 @@ std::string Manipulation::getName() {
     return this->name;
 }
 
-Mat Manipulation::applyManipulation() {
-    std::cout << "Default applyManipulation, must be override" << std::endl;
-    exit(-1);
-}
+void Manipulation::onResize(){}
 
 void Manipulation::updateImageDisplay() {
     this->imageModified = applyManipulation();
+    this->updateImageDisplayOnWorkspace();
+}
+
+void Manipulation::updateImageDisplayOnWorkspace() {
     this->workspace.updateImageDisplay(this->imageModified);
 }
 
@@ -33,5 +34,6 @@ Mat Manipulation::getImageModified() {
 
 void Manipulation::setImageSavedInMemory(Mat currentImage) {
     this->imageSavedInMemory = currentImage;
-     currentImage.copyTo(this->imageModified);
+    currentImage.copyTo(this->imageModified);
 }
+
