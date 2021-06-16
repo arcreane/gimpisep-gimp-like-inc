@@ -49,17 +49,16 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
 }
 
 Mat CannyEdge::cannyEdge(Mat &image, int threshold1, int threshold2, int kernelSize) {
-    Mat result, grey, blur;
-    cvtColor(image, grey, COLOR_BGR2GRAY);
+    Mat result, blur;
     if (kernelSize > 0) {
-        GaussianBlur(grey, blur, Size(kernelSize, kernelSize), 0);
+        GaussianBlur(image, blur, Size(kernelSize, kernelSize), 0);
     } else {
-        blur = grey;
+        blur = image;
     }
     Canny(blur, result, threshold1, threshold2);
     return result;
 }
 
 Mat CannyEdge::applyManipulation() {
-    return cannyEdge(this->currentImage, this->threshold1, this->threshold2, this->kernelSize);
+    return cannyEdge(this->imageSavedInMemory, this->threshold1, this->threshold2, this->kernelSize);
 };

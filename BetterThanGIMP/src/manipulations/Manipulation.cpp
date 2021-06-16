@@ -23,9 +23,15 @@ Mat Manipulation::applyManipulation() {
 }
 
 void Manipulation::updateImageDisplay() {
-    this->workspace.updateImageDisplay(applyManipulation());
+    this->imageModified = applyManipulation();
+    this->workspace.updateImageDisplay(this->imageModified);
 }
 
-void Manipulation::setCurrentImage(Mat currentImage) {
-    this->currentImage = currentImage;
+Mat Manipulation::getImageModified() {
+    return this->imageModified;
+}
+
+void Manipulation::setImageSavedInMemory(Mat currentImage) {
+    this->imageSavedInMemory = currentImage;
+     currentImage.copyTo(this->imageModified);
 }

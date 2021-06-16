@@ -8,10 +8,12 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QMessageBox>
+#include <QCheckBox>
 #include <QString>
 #include <QLabel>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QScrollArea>
 #include "Panorama.h"
 
 using namespace std;
@@ -28,31 +30,63 @@ bool checkBlackColumn(const Mat &gray_image, int x, const Rect &outputRect);
 
 Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->name = "Panorama";
-    this->paths = QFileDialog::getOpenFileNames(nullptr, "Open file", "/",
-                                                "Image Files (*.png * jpg *bmp *jpeg * jfif)");
-
+    this->mustBeCropped = false;
     this->options->setLayout(new QVBoxLayout());
+    this->thumbnails = new QWidget();
 
-    QString imagePathsLabel = "";
-
-    for (int i = 0; i < paths.length(); i++){
-        string filePath = paths.at(i).toUtf8().constData();
-        this->images_to_stitch.push_back(imread(filePath));
-        imagePathsLabel += paths.at(i) + "\n";
-    }
-
-    QLabel *filesLabel = new QLabel(imagePathsLabel);
-
+    QPushButton *selectFiles = new QPushButton(("Select files"));
+    connect(selectFiles, &QPushButton::released, this, [this]() {
+        this->paths = QFileDialog::getOpenFileNames(nullptr, "Open file", "/",
+                                                    "Image Files (*.png * jpg *bmp *jpeg * jfif)");
+        this->images_to_stitch.clear();
+        for (int i = 0; i < paths.length(); i++){
+            string filePath = paths.at(i).toUtf8().constData();
+            this->images_to_stitch.push_back(imread(filePath));
+        }
+        this->displayImagesThumbnails();
+        this->options->layout()->addWidget(this->thumbnails);
+    });
 
     QPushButton *applyStitching = new QPushButton(tr("Stitch images"));
     connect(applyStitching, &QPushButton::released, this, [this]() {
-        updateImageDisplay();
+        if (images_to_stitch.size() > 1){
+            this->updateImageDisplay();
+        } else {
+            std::cout << "Can't create a panorama out of less than 2 images" << std::endl;
+            QMessageBox error;
+            error.setText("Can't create a panorama out of less than 2 images!");
+            error.exec();
+        }
+
     });
 
-    this->options->layout()->addWidget(filesLabel);
+    QCheckBox *correctStitching = new QCheckBox(tr("Correct stitching"));
+    connect(correctStitching, &QCheckBox::stateChanged, this, [this](int state) {
+        this->mustBeCropped = state;
+    });
+
+    this->options->layout()->addWidget(selectFiles);
+    this->options->layout()->addWidget(correctStitching);
     this->options->layout()->addWidget(applyStitching);
     this->options->setStyleSheet("QWidget{background-color: green;}");
 
+}
+
+void Panorama::displayImagesThumbnails(){
+    delete this->thumbnails;
+    this->thumbnails = new QWidget();
+    this->thumbnails->setLayout(new QVBoxLayout());
+    for (Mat image : this->images_to_stitch) {
+        Mat tmp;
+        QLabel *thumbnail = new QLabel();
+        thumbnail->setMaximumWidth(300);
+        cvtColor(image, tmp, COLOR_BGR2RGB);
+        QImage qImage = QImage((uchar *) tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
+                .scaled(thumbnail->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        thumbnail->setPixmap(QPixmap::fromImage(qImage));
+        this->thumbnails->layout()->addWidget(thumbnail);
+    }
+    this->options->update();
 }
 
 /* Cree un panorama a partir d'un vecteur d'images */
@@ -78,8 +112,11 @@ Mat Panorama::stitch(vector<Mat> images_to_stitch) {
     }
 
     // Retourne le panorama resultant
-    crop_after_stitching(panorama, panorama_cropped);
-    return panorama_cropped;
+    if (this->mustBeCropped){
+        crop_after_stitching(panorama, panorama_cropped);
+        return panorama_cropped;
+    }
+    return panorama;
 
 }
 

@@ -9,16 +9,25 @@
 #include "OptionsMenu.h"
 
 OptionsMenu::OptionsMenu() {
-    layout = new QGridLayout(this);
+    layout = new QVBoxLayout(this);
     this->currentOptions = new QWidget();
+
+    this->title = new QLabel("There is no manipulation for the moment...");
+    this->title->setMaximumHeight(20);
+
+    this->layout->addWidget(this->title);
+    this->layout->addWidget(currentOptions);
+
     this->setStyleSheet("QWidget{background-color: orange;}");
-    this->layout->addWidget(new QLabel("Some useful options:"));
+}
+
+void OptionsMenu::setOptions(QWidget *options, QString manipulationName) {
+    this->title->setText("Options for the manipulation " + manipulationName);
+    removeOptions();
+    this->currentOptions = options;
     this->layout->addWidget(currentOptions);
 }
 
-void OptionsMenu::setOptions(QWidget *options) {
-    this->layout->removeWidget(currentOptions);
+void OptionsMenu::removeOptions(){
     delete this->currentOptions;
-    this->currentOptions = options;
-    this->layout->addWidget(currentOptions);
 }

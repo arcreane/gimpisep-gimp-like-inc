@@ -24,13 +24,16 @@ public:
 
     std::string getName();
 
-    void setCurrentImage(Mat);
+    Mat getImageModified();
+
+    void setImageSavedInMemory(Mat);
 
 
 protected:
     QWidget *options;
     std::string name;
-    Mat currentImage;
+    Mat imageSavedInMemory;
+    Mat imageModified;
     Workspace &workspace;
 
     void updateImageDisplay();

@@ -46,6 +46,10 @@ void Window::loadImageFromString(QString path) {
             error.setText("An error has occured");
             error.exec();
         } else {
+           if(currentManipulation){
+               delete this->currentManipulation;
+               this->manipulationOptionsMenu->removeOptions();
+           }
             temp.copyTo(this->image);
             workspace->updateImageDisplay();
         }
@@ -54,31 +58,26 @@ void Window::loadImageFromString(QString path) {
 
 void Window::setCurrentManipulation(Manipulation *manipulation) {
 
-    if (!this->image.empty() || manipulation->getName() == "Panorama" || currentManipulation) {
+    if (currentManipulation && currentManipulation->getName() != "Panorama") {
+        this->image = currentManipulation->getImageModified();
+        delete this->currentManipulation;
+        workspace->updateImageDisplay();
+    }
 
-        if (!this->image.empty()) {
-            if (currentManipulation != nullptr) {
-                this->image = currentManipulation->applyManipulation();
-                delete this->currentManipulation;
-            }
+    if (!this->image.empty() || manipulation->getName() == "Panorama") {
+        std::cout << manipulation->getName() << std::endl;
+        this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
+                                                  QString::fromUtf8(manipulation->getName().c_str()));
 
-            if (!this->image.empty()) {
-                workspace->updateImageDisplay();
-            }
+        this->currentManipulation = manipulation;
+        this->currentManipulation->setImageSavedInMemory(this->image);
 
-            std::cout << manipulation->getName() << std::endl;
-            this->manipulationOptionsMenu->setOptions(manipulation->getOptions());
+    } else {
+        std::cout << "Error loading image" << std::endl;
+        QMessageBox error;
+        error.setText("Can't perform requested manipulation on an empty image!");
+        error.exec();
 
-            this->currentManipulation = manipulation;
-            this->currentManipulation->setCurrentImage(this->image);
-
-        } else {
-
-            std::cout << "Error loading image" << std::endl;
-            QMessageBox error;
-            error.setText("Can't perform requested manipulation on an empty image!");
-            error.exec();
-        }
     }
 }
 
