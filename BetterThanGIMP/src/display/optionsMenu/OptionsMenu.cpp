@@ -13,11 +13,10 @@ OptionsMenu::OptionsMenu() {
     this->currentOptions = new QWidget();
 
     this->title = new QLabel("There is no manipulation for the moment...");
-
+    this->title->setMaximumHeight(20);
 
     this->layout->addWidget(this->title);
     this->layout->addWidget(currentOptions);
-    this->layout->addStretch();
 
     this->setStyleSheet("QWidget{background-color: orange;}");
 }
@@ -30,6 +29,5 @@ void OptionsMenu::setOptions(QWidget *options, QString manipulationName) {
 }
 
 void OptionsMenu::removeOptions(){
-    this->layout->removeWidget(currentOptions);
     delete this->currentOptions;
 }

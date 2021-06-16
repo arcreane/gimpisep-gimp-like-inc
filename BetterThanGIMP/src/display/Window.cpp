@@ -31,6 +31,7 @@ Window::Window() {
     layout->addWidget(workspace, 0, 1, 0, 3);
     layout->addWidget(manipulationOptionsMenu, 0, 4);
 
+    this->manipulationOptionsMenu->setMaximumWidth(380);
     this->setMinimumSize(1280, 720);
     this->show();
 }
@@ -57,24 +58,27 @@ void Window::loadImageFromString(QString path) {
 }
 
 void Window::setCurrentManipulation(Manipulation *manipulation) {
-    if (currentManipulation) {
+
+    if (currentManipulation && currentManipulation->getName() != "Panorama") {
         this->image = currentManipulation->getImageModified();
         delete this->currentManipulation;
         workspace->updateImageDisplay();
     }
 
-    if (!this->image.empty()) {
+    if (!this->image.empty() || manipulation->getName() == "Panorama") {
         std::cout << manipulation->getName() << std::endl;
         this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
                                                   QString::fromUtf8(manipulation->getName().c_str()));
 
         this->currentManipulation = manipulation;
         this->currentManipulation->setImageSavedInMemory(this->image);
+
     } else {
         std::cout << "Error loading image" << std::endl;
         QMessageBox error;
         error.setText("Can't perform requested manipulation on an empty image!");
         error.exec();
+
     }
 }
 
