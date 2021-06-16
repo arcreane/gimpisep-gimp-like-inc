@@ -16,7 +16,7 @@ using namespace cv;
 class Manipulation : public QWidget {
 Q_OBJECT
 public:
-    Manipulation(Workspace &);
+    Manipulation(Workspace &workspace);
 
     virtual Mat applyManipulation() = 0;
 
@@ -28,7 +28,7 @@ public:
 
     Mat getImageModified();
 
-    void setImageSavedInMemory(Mat);
+    void setImageSavedInMemory(Mat imageInMemory);
 
     void updateImageDisplayOnWorkspace();
 

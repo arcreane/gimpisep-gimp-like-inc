@@ -17,13 +17,13 @@ private:
     Workspace &workspace;
 
 public:
-    MenuBar(Workspace &);
+    MenuBar(Workspace &workspace);
 
 public:
 signals:
 
-    void onOpenEmitFilePath(QString);
-    void newManipulationSelected(Manipulation *);
+    void onOpenEmitFilePath(QString path);
+    void newManipulationSelected(Manipulation *manipulation);
     void saveOnDisk();
 
 public slots :

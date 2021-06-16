@@ -16,19 +16,19 @@ Q_OBJECT
 private:
     cv::Mat &currentImage;
 public:
-    Workspace(cv::Mat &);
+    Workspace(cv::Mat & imageInMemory);
 
     void updateImageDisplay();
 
-    void updateImageDisplay(cv::Mat);
+    void updateImageDisplay(cv::Mat imageToDisplay);
 
-    void dropEvent(QDropEvent *) override;
+    void dropEvent(QDropEvent *ev) override;
 
-    void dragEnterEvent(QDragEnterEvent *) override;
+    void dragEnterEvent(QDragEnterEvent *ev) override;
 
 public:
 signals:
-    void onDropEmitFilePath(QString);
+    void onDropEmitFilePath(QString path);
 
 
 };

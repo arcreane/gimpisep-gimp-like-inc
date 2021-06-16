@@ -25,12 +25,16 @@ private:
     Workspace *workspace;
     OptionsMenu *manipulationOptionsMenu;
     cv::Mat image;
-    Manipulation* currentManipulation;
+    Manipulation *currentManipulation;
+
     void resizeEvent(QResizeEvent *e) override;
 
 private slots :
-    void loadImageFromString(QString);
-    void setCurrentManipulation(Manipulation*);
+
+    void loadImageFromString(QString path);
+
+    void setCurrentManipulation(Manipulation *manipulationToUse);
+
     void saveOnDisk();
 
 public:

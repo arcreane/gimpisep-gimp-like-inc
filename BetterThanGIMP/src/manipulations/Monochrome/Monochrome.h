@@ -12,7 +12,7 @@
 class Monochrome : public Manipulation {
 
 public:
-    Monochrome(Workspace &);
+    Monochrome(Workspace &workspace);
 
     Mat applyManipulation();
 

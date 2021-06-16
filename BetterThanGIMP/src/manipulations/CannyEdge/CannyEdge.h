@@ -10,7 +10,7 @@
 
 class CannyEdge : public Manipulation {
 public:
-    CannyEdge(Workspace &);
+    CannyEdge(Workspace &workspace);
 
     Mat applyManipulation();
 
@@ -19,7 +19,7 @@ private:
     int threshold2;
     int kernelSize;
 
-    Mat cannyEdge(Mat&, int, int, int);
+    Mat cannyEdge(Mat &image, int threshold1, int threshold2, int blurKernelSize);
 };
 
 
