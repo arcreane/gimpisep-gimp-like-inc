@@ -69,7 +69,6 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(selectFiles);
     this->options->layout()->addWidget(correctStitching);
     this->options->layout()->addWidget(applyStitching);
-    this->options->layout()->setAlignment(Qt::AlignCenter);
     this->options->setMaximumWidth(380);
     this->options->setStyleSheet("QWidget{background-color: green;}");
 
@@ -92,6 +91,7 @@ void Panorama::displayImagesThumbnails(){
                 .scaled(thumbnail->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
         thumbnail->setPixmap(QPixmap::fromImage(qImage));
         this->thumbnails->layout()->addWidget(thumbnail);
+        this->thumbnails->layout()->setAlignment(thumbnail,Qt::AlignHCenter);
     }
     this->panelThumbnails->setWidget(this->thumbnails);
     this->options->update();
