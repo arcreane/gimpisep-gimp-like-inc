@@ -33,4 +33,5 @@ Mat Manipulation::getImageModified() {
 
 void Manipulation::setImageSavedInMemory(Mat currentImage) {
     this->imageSavedInMemory = currentImage;
+     currentImage.copyTo(this->imageModified);
 }
