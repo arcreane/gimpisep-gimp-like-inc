@@ -33,6 +33,7 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->mustBeCropped = false;
     this->options->setLayout(new QVBoxLayout());
     this->thumbnails = new QWidget();
+    this->panelThumbnails = new QScrollArea;
 
     QPushButton *selectFiles = new QPushButton(("Select files"));
     connect(selectFiles, &QPushButton::released, this, [this]() {
@@ -44,7 +45,7 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
             this->images_to_stitch.push_back(imread(filePath));
         }
         this->displayImagesThumbnails();
-        this->options->layout()->addWidget(this->thumbnails);
+        this->options->layout()->addWidget(this->panelThumbnails);
     });
 
     QPushButton *applyStitching = new QPushButton(tr("Stitch images"));
@@ -68,13 +69,19 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(selectFiles);
     this->options->layout()->addWidget(correctStitching);
     this->options->layout()->addWidget(applyStitching);
+    this->options->layout()->setAlignment(Qt::AlignCenter);
+    this->options->setMaximumWidth(380);
     this->options->setStyleSheet("QWidget{background-color: green;}");
 
 }
 
 void Panorama::displayImagesThumbnails(){
     delete this->thumbnails;
+    delete this->panelThumbnails;
     this->thumbnails = new QWidget();
+    this->panelThumbnails = new QScrollArea;
+    this->panelThumbnails->setMaximumWidth(380);
+    this->thumbnails->setMaximumWidth(380);
     this->thumbnails->setLayout(new QVBoxLayout());
     for (Mat image : this->images_to_stitch) {
         Mat tmp;
@@ -86,6 +93,7 @@ void Panorama::displayImagesThumbnails(){
         thumbnail->setPixmap(QPixmap::fromImage(qImage));
         this->thumbnails->layout()->addWidget(thumbnail);
     }
+    this->panelThumbnails->setWidget(this->thumbnails);
     this->options->update();
 }
 
