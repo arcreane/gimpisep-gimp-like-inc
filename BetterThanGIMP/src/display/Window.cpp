@@ -3,16 +3,14 @@
 //
 
 #include <QStyleFactory>
-#include <QStatusBar>
 #include <QPushButton>
 #include <iostream>
-#include <QFileDialog>
 #include <QMessageBox>
 #include "Window.h"
 
 Window::Window() {
     this->currentManipulation = nullptr;
-    this->layout = new QGridLayout(this);
+    this->layout = new QHBoxLayout();
 
     this->workspace = new Workspace(this->image);
     connect(this->workspace, &Workspace::onDropEmitFilePath, this, &Window::loadImageFromString);
@@ -27,18 +25,19 @@ Window::Window() {
 
     this->setLayout(layout);
     layout->setMenuBar(mainMenu);
-    layout->addWidget(toolMenu, 0, 0);
-    layout->addWidget(workspace, 0, 1, 0, 3);
-    layout->addWidget(manipulationOptionsMenu, 0, 4);
 
-    this->setMinimumSize(1600, 720);
+    layout->addWidget(toolMenu, 1);
+    layout->addWidget(workspace, 7);
+    layout->addWidget(manipulationOptionsMenu, 2);
+
+    this->setMinimumSize(1280, 720);
+
     this->show();
 }
 
 void Window::loadImageFromString(QString path) {
     if (path.size() > 0) {
         std::string filePath = path.toUtf8().constData();
-        std::cout << filePath << std::endl;
         cv::Mat temp = cv::imread(filePath);
         if (temp.empty()) {
             std::cout << "Error loading image" << std::endl;
@@ -48,6 +47,7 @@ void Window::loadImageFromString(QString path) {
         } else {
            if(currentManipulation){
                delete this->currentManipulation;
+               this->currentManipulation = nullptr;
                this->manipulationOptionsMenu->removeOptions();
            }
             temp.copyTo(this->image);
@@ -57,24 +57,26 @@ void Window::loadImageFromString(QString path) {
 }
 
 void Window::setCurrentManipulation(Manipulation *manipulation) {
-    if (currentManipulation) {
+
+    if (currentManipulation && !currentManipulation->getImageModified().empty()) {
         this->image = currentManipulation->getImageModified();
         delete this->currentManipulation;
         workspace->updateImageDisplay();
     }
 
-    if (!this->image.empty()) {
-        std::cout << manipulation->getName() << std::endl;
+    if (!this->image.empty() || manipulation->getName() == "Panorama") {
         this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
                                                   QString::fromUtf8(manipulation->getName().c_str()));
 
         this->currentManipulation = manipulation;
         this->currentManipulation->setImageSavedInMemory(this->image);
+
     } else {
         std::cout << "Error loading image" << std::endl;
         QMessageBox error;
         error.setText("Can't perform requested manipulation on an empty image!");
         error.exec();
+
     }
 }
 
@@ -84,4 +86,18 @@ void Window::saveOnDisk() {
     }
     imwrite("saved.png", this->image);
     //TODO sauver l'image dans un dossier
+}
+
+void Window::resizeEvent(QResizeEvent *e){
+    if (currentManipulation){
+        currentManipulation->onResize();
+    }
+    if (!this->image.empty()){
+        if(currentManipulation){
+            currentManipulation->updateImageDisplayOnWorkspace();
+        } else {
+            workspace->updateImageDisplay();
+        }
+
+    }
 }

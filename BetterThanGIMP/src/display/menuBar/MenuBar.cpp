@@ -10,6 +10,7 @@
 #include "MenuBar.h"
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
+#include "../../manipulations/Panorama/Panorama.h"
 
 MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
@@ -39,9 +40,13 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
 
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
-//    connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
     connect(monochromeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Monochrome(this->workspace));
+    });
+
+    QAction *panoramaAction = filterMenu->addAction("Panorama");
+    connect(panoramaAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Panorama(this->workspace));
     });
 
     QAction *contrastAction = filterMenu->addAction("Contrast");
@@ -56,7 +61,6 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");
 
     QAction *cannyEdge = filterMenu->addAction("Canny Edge");
-//    connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
     connect(cannyEdge, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new CannyEdge(this->workspace));
     });
