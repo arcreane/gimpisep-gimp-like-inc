@@ -7,7 +7,7 @@
 
 
 #include <QWidget>
-#include <QGridLayout>
+#include <QVBoxLayout>
 
 class OptionsMenu : public QWidget {
 public:

@@ -15,8 +15,6 @@ public:
 
 private:
     double percentChange;
-
-    Mat brightness(Mat &image, double percentChange);
 };
 
 #endif //BETTERTHANGIMP_BRIGHTNESS_H

@@ -13,11 +13,6 @@ public:
     Brush(Workspace &);
 
     Mat applyManipulation() override;
-
-private:
-    Mat draw(Mat &onImage, Point coordinates, int brushSize, Scalar color);
-
-
 };
 
 

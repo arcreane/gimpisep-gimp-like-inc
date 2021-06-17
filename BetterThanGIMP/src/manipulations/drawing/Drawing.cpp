@@ -2,9 +2,9 @@
 // Created by Hugues Baratgin on 17/06/2021.
 //
 
-#include "Drawing.h"
 #include <QVBoxLayout>
-#include <QSlider>
+
+#include "Drawing.h"
 #include "../../component/Slider/Slider.h"
 
 Drawing::Drawing(Workspace &w) : Manipulation(w) {

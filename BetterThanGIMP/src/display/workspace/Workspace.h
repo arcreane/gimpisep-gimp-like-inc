@@ -15,7 +15,7 @@
 class Workspace : public QLabel {
 Q_OBJECT
 private:
-    const cv::Mat &currentImage;
+    const cv::Mat &imageInMemory;
 
     cv::Point convertCoordinatesOnDisplayToCoordinatesOnImage(double xOnDisplayRaw, double yOnDisplayRaw);
 
@@ -43,7 +43,7 @@ signals:
 
     void mouseMoved(cv::Point coordinates);
 
-    void mousePressed(cv::Point clicCoordinates);
+    void mousePressed(cv::Point clickCoordinates);
 
     void mouseReleased();
 };

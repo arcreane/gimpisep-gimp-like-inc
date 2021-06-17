@@ -2,18 +2,19 @@
 // Created by yakiimo on 6/17/21.
 //
 
-#include "Dilatation.h"
-#include <QSlider>
+#include <opencv2/opencv.hpp>
 #include <QHBoxLayout>
 #include <QComboBox>
+
+#include "Dilatation.h"
 #include "../../component/Slider/Slider.h"
-#include <opencv2/opencv.hpp>
+
 
 using namespace cv;
 
-Dilatation::Dilatation(Workspace &w) : Manipulation(w){
+Dilatation::Dilatation(Workspace &w) : Manipulation(w) {
     this->name = "Dilatation";
-    this->options->setLayout(new QHBoxLayout());
+    this->options->setLayout(new QVBoxLayout());
 
 
     this->inputSize = 1;
@@ -26,7 +27,6 @@ Dilatation::Dilatation(Workspace &w) : Manipulation(w){
     chooseKernel->addItem("ELLIPSE");
     connect(chooseKernel, &QComboBox::currentTextChanged, this, [this, chooseKernel]() {
         this->inputKernel = chooseKernel->currentIndex();
-        std::cout << chooseKernel->currentIndex() << std::endl;
         updateImageDisplay();
     });
 
@@ -42,16 +42,14 @@ Dilatation::Dilatation(Workspace &w) : Manipulation(w){
     this->options->layout()->addWidget(sliderDilatationInput);
 }
 
-Mat Dilatation::dilatation(Mat &image, int inputKernel, int inputSize){
-
-    Size dilatationSize = Size(inputSize,inputSize);
-    Mat imageDestination;
-    Mat kernelDilatation = getStructuringElement(inputKernel, dilatationSize);
-    dilate(image,imageDestination,kernelDilatation);
-
-    return imageDestination;
-}
 
 Mat Dilatation::applyManipulation() {
-    return dilatation(this->imageSavedInMemory, this->inputKernel, this->inputSize);
+    
+    Size dilatationSize = Size(this->inputSize,this->inputSize);
+    Mat imageDestination;
+    Mat dilatationKernel = getStructuringElement(this->inputKernel, dilatationSize);
+    dilate(this->imageSavedInMemory,imageDestination, dilatationKernel);
+    
+    return imageDestination;
+
 };

@@ -3,6 +3,7 @@
 //
 
 #include <opencv2/imgproc.hpp>
+
 #include "Circle.h"
 
 Circle::Circle(Workspace &w) : Drawing(w) {
@@ -24,20 +25,15 @@ Circle::Circle(Workspace &w) : Drawing(w) {
     });
 }
 
-Mat Circle::drawCircle(Mat &image, Point center, Point end, int size, Scalar color) {
+Mat Circle::applyManipulation() {
     Mat result;
-    image.copyTo(result);
+    this->imageSavedInMemory.copyTo(result);
 
     // Calculate radius of the circle
-    float radius = sqrt(pow(center.x - this->mouseCoordinates.x, 2) +
-                        pow(center.y - this->mouseCoordinates.y, 2));
+    float radius = sqrt(pow(this->center.x - this->mouseCoordinates.x, 2) +
+                        pow(this->center.y - this->mouseCoordinates.y, 2));
 
     // Draw the circle
-    cv::circle(result, center, radius, color, size);
+    cv::circle(result, center, radius, Scalar(this->blue, this->green, this->red), this->brushSize);
     return result;
-}
-
-Mat Circle::applyManipulation() {
-    return drawCircle(this->imageSavedInMemory, this->center, this->mouseCoordinates, this->brushSize,
-                      Scalar(this->blue, this->green, this->red));
 };

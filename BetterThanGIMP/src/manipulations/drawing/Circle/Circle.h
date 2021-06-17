@@ -16,8 +16,6 @@ public:
 
 private:
     cv::Point center;
-
-    Mat drawCircle(Mat &onImage, Point center, Point end, int brushSize, Scalar color);
 };
 
 

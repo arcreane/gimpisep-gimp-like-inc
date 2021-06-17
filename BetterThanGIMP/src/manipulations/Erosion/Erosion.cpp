@@ -2,19 +2,18 @@
 // Created by yakiimo on 6/17/21.
 //
 
-#include "Erosion.h"
-#include <QSlider>
+#include <opencv2/opencv.hpp>
 #include <QHBoxLayout>
 #include <QComboBox>
-#include <iostream>
+
+#include "Erosion.h"
 #include "../../component/Slider/Slider.h"
-#include <opencv2/opencv.hpp>
 
 using namespace cv;
 
-Erosion::Erosion(Workspace &w) : Manipulation(w){
+Erosion::Erosion(Workspace &w) : Manipulation(w) {
     this->name = "Erosion";
-    this->options->setLayout(new QHBoxLayout());
+    this->options->setLayout(new QVBoxLayout());
 
 
     this->inputSize = 1;
@@ -27,7 +26,6 @@ Erosion::Erosion(Workspace &w) : Manipulation(w){
     chooseKernel->addItem("ELLIPSE");
     connect(chooseKernel, &QComboBox::currentTextChanged, this, [this, chooseKernel]() {
         this->inputKernel = chooseKernel->currentIndex();
-        std::cout << chooseKernel->currentIndex() << std::endl;
         updateImageDisplay();
     });
 
@@ -43,16 +41,11 @@ Erosion::Erosion(Workspace &w) : Manipulation(w){
     this->options->layout()->addWidget(sliderErosionInput);
 }
 
-Mat Erosion::erosion(Mat &image, int inputKernel, int inputSize){
-
-    Size erosionSize = Size(inputSize,inputSize);
+Mat Erosion::applyManipulation() {
     Mat imageDestination;
-    Mat kernelErosion =  getStructuringElement(inputKernel, erosionSize);
-    erode(image,imageDestination,kernelErosion);
+    Size erosionSize = Size(this->inputSize, this->inputSize);
+    Mat erosionKernel = getStructuringElement(this->inputKernel, erosionSize);
+    erode(this->imageSavedInMemory, imageDestination, erosionKernel);
 
     return imageDestination;
-}
-
-Mat Erosion::applyManipulation() {
-    return erosion(this->imageSavedInMemory, this->inputKernel, this->inputSize);
 };
