@@ -10,6 +10,7 @@
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
 #include "../../manipulations/Panorama/Panorama.h"
+#include "../../manipulations/Brightness/Brightness.h"
 #include "../../manipulations/Blur/Blur.h"
 #include "../../manipulations/Erosion/Erosion.h"
 #include "../../manipulations/Dilatation/Dilatation.h"
@@ -60,13 +61,16 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     //connect(contrastAction, SLOT(triggered()), this, SLOT(applyTransformation(image_to_bright)));
 
     QAction *expositionAction = filterMenu->addAction("Exposition");
+    
     QAction *erosionAction = filterMenu->addAction("Erosion");
     connect(erosionAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Erosion(this->workspace));
     });
 
     QAction *brightnessAction = filterMenu->addAction("Brightness");
-    //connect(brightnessAction, &QAction::triggered, this, &MenuBar::brightness);
+    connect(brightnessAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Brightness(this->workspace));
+    });
 
     QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");
     connect(gaussianBlurAction, &QAction::triggered, this, [this]() {
