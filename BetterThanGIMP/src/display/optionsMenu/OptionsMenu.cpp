@@ -24,13 +24,15 @@ OptionsMenu::OptionsMenu() {
 }
 
 void OptionsMenu::setOptions(QWidget *options, QString manipulationName) {
+    delete this->currentOptions;
     this->title->setText("Options for the manipulation " + manipulationName);
-    removeOptions();
     this->currentOptions = options;
     this->layout->addWidget(currentOptions);
 }
 
-void OptionsMenu::removeOptions(){
+void OptionsMenu::removeOptions() {
+    this->title->setText("There is no manipulation for the moment...");
     delete this->currentOptions;
+    this->currentOptions = nullptr;
 }
 
