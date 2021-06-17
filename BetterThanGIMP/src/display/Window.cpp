@@ -8,7 +8,8 @@
 #include <QMessageBox>
 #include "Window.h"
 
-Window::Window() {
+Window::Window()
+{
     this->currentManipulation = nullptr;
     this->layout = new QHBoxLayout();
 
@@ -21,7 +22,9 @@ Window::Window() {
     connect(this->mainMenu, &MenuBar::saveOnDisk, this, &Window::saveOnDisk);
 
     this->manipulationOptionsMenu = new OptionsMenu();
-    this->toolMenu = new ToolMenu();
+
+    this->toolMenu = new ToolMenu(*this->workspace);
+    connect(this->toolMenu, &ToolMenu::newManipulationSelected, this, &Window::setCurrentManipulation);
 
     this->setLayout(layout);
     layout->setMenuBar(mainMenu);
@@ -35,69 +38,88 @@ Window::Window() {
     this->show();
 }
 
-void Window::loadImageFromString(QString path) {
-    if (path.size() > 0) {
+void Window::loadImageFromString(QString path)
+{
+    if (path.size() > 0)
+    {
         std::string filePath = path.toUtf8().constData();
         cv::Mat temp = cv::imread(filePath);
-        if (temp.empty()) {
+        if (temp.empty())
+        {
             std::cout << "Error loading image" << std::endl;
             QMessageBox error;
             error.setText("An error has occured");
             error.exec();
-        } else {
-           if(currentManipulation){
-               delete this->currentManipulation;
-               this->currentManipulation = nullptr;
-               this->manipulationOptionsMenu->removeOptions();
-           }
+        }
+        else
+        {
+            if (currentManipulation)
+            {
+                delete this->currentManipulation;
+                this->currentManipulation = nullptr;
+                this->manipulationOptionsMenu->removeOptions();
+            }
             temp.copyTo(this->image);
             workspace->updateImageDisplay();
         }
     }
 }
 
-void Window::setCurrentManipulation(Manipulation *manipulation) {
+void Window::setCurrentManipulation(Manipulation *manipulation)
+{
 
-    if (currentManipulation && !currentManipulation->getImageModified().empty()) {
+    if (currentManipulation && !currentManipulation->getImageModified().empty())
+    {
         this->image = currentManipulation->getImageModified();
         delete this->currentManipulation;
-        workspace->updateImageDisplay();
     }
 
-    if (!this->image.empty() || manipulation->getName() == "Panorama") {
+    if (!this->image.empty() || manipulation->getName() == "Panorama")
+    {
+        std::cout << manipulation->getName() << std::endl;
         this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
                                                   QString::fromUtf8(manipulation->getName().c_str()));
 
+        std::cout << "Set option done" << std::endl;
         this->currentManipulation = manipulation;
         this->currentManipulation->setImageSavedInMemory(this->image);
 
-    } else {
+        workspace->updateImageDisplay();
+    }
+    else
+    {
         std::cout << "Error loading image" << std::endl;
         QMessageBox error;
         error.setText("Can't perform requested manipulation on an empty image!");
         error.exec();
-
     }
 }
 
-void Window::saveOnDisk() {
-    if (currentManipulation != nullptr) {
+void Window::saveOnDisk()
+{
+    if (currentManipulation != nullptr)
+    {
         this->image = currentManipulation->applyManipulation();
     }
     imwrite("saved.png", this->image);
     //TODO sauver l'image dans un dossier
 }
 
-void Window::resizeEvent(QResizeEvent *e){
-    if (currentManipulation){
+void Window::resizeEvent(QResizeEvent *e)
+{
+    if (currentManipulation)
+    {
         currentManipulation->onResize();
     }
-    if (!this->image.empty()){
-        if(currentManipulation){
+    if (!this->image.empty())
+    {
+        if (currentManipulation)
+        {
             currentManipulation->updateImageDisplayOnWorkspace();
-        } else {
+        }
+        else
+        {
             workspace->updateImageDisplay();
         }
-
     }
 }

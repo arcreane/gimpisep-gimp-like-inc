@@ -9,7 +9,7 @@
 
 using namespace cv;
 
-Workspace::Workspace(Mat &currentImage) : currentImage(currentImage) {
+Workspace::Workspace(const Mat &currentImage) : currentImage(currentImage) {
     //TEMP
     this->setStyleSheet("QLabel{background-color: red; color: blue;}");
     this->setAlignment(Qt::AlignCenter);
@@ -43,4 +43,45 @@ void Workspace::dropEvent(QDropEvent *event) {
 
 void Workspace::dragEnterEvent(QDragEnterEvent *event) {
     event->accept();
+}
+
+void Workspace::mouseReleaseEvent(QMouseEvent *) {
+
+    std::cout << "xReal   yReal " << std::endl;
+}
+
+void Workspace::mouseMoveEvent(QMouseEvent *ev) {
+    if (this->pixmap()) {
+        Point coordOnImage = convertCoordinatesOnDisplayToCoordinatesOnImage(ev->x(), ev->y());
+        if (coordOnImage.x != -1 && coordOnImage.y != -1) {
+            emit mouseMoved(coordOnImage);
+        }
+    }
+
+}
+
+Point Workspace::convertCoordinatesOnDisplayToCoordinatesOnImage(double xOnDisplayRaw, double yOnDisplayRaw) {
+    double onDisplayWidth = this->pixmap()->rect().width();
+    double onDisplayHeight = this->pixmap()->rect().height();
+
+    double onRealWidth = this->currentImage.cols;
+    double onRealHeight = this->currentImage.rows;
+
+    double xOffset = (this->width() - onDisplayWidth) / 2;
+    double yOffset = (this->height() - onDisplayHeight) / 2;
+
+    double xRatio = onRealWidth / onDisplayWidth;
+    double yRatio = onRealHeight / onDisplayHeight;
+
+    double xOnDisplay = xOnDisplayRaw - xOffset;
+    double yOnDisplay = yOnDisplayRaw - yOffset;
+
+    int xOnRealImage = (int) xOnDisplay * xRatio;
+    int yOnRealImage = (int) yOnDisplay * yRatio;
+
+    if ((xOnRealImage >= 0 && xOnRealImage <= onRealWidth)
+        && (yOnRealImage >= 0 && yOnRealImage <= onRealHeight)) {
+        return Point(xOnRealImage, yOnRealImage);
+    }
+    return Point(-1, -1);
 }

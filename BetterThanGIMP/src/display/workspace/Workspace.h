@@ -7,6 +7,7 @@
 
 
 #include <opencv2/core/mat.hpp>
+#include <opencv2/core/types.hpp>
 #include <QLabel>
 #include <QDropEvent>
 #include <QDragEnterEvent>
@@ -14,9 +15,12 @@
 class Workspace : public QLabel {
 Q_OBJECT
 private:
-    cv::Mat &currentImage;
+    const cv::Mat &currentImage;
+
+    cv::Point convertCoordinatesOnDisplayToCoordinatesOnImage(double xOnDisplayRaw, double yOnDisplayRaw);
+
 public:
-    Workspace(cv::Mat & imageInMemory);
+    Workspace(const cv::Mat & imageInMemory);
 
     void updateImageDisplay();
 
@@ -26,11 +30,18 @@ public:
 
     void dragEnterEvent(QDragEnterEvent *ev) override;
 
+    void mouseReleaseEvent(QMouseEvent *ev) override;
+
+    void mouseMoveEvent(QMouseEvent *ev) override;
+
 public:
 signals:
+
     void onDropEmitFilePath(QString path);
 
+    void mouseMoved(cv::Point coordinates);
 
+    void mouseReleased();
 };
 
 
