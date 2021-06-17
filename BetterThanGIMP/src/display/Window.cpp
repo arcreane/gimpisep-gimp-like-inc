@@ -112,6 +112,7 @@ void Window::exportImage(QString path) {
         error.setText("There is no image to be saved!");
         error.exec();
     }
+    
     if (!this->image.empty()) {
         if (currentManipulation != nullptr) {
             this->image = currentManipulation->applyManipulation();
