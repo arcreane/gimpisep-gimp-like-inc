@@ -6,21 +6,15 @@
 #define BETTERTHANGIMP_BRUSH_H
 
 
-#include "../Manipulation.h"
+#include "../Drawing.h"
 
-class Brush : public Manipulation {
+class Brush : public Drawing {
 public:
     Brush(Workspace &);
 
-    cv::Mat applyManipulation();
+    Mat applyManipulation() override;
 
 private:
-    Point coordinates;
-    int brushSize;
-    int red;
-    int green;
-    int blue;
-
     Mat draw(Mat &, Point, int, Scalar);
 
 

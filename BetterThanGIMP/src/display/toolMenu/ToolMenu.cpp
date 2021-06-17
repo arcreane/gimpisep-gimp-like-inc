@@ -5,11 +5,12 @@
 #include <QPushButton>
 #include <QLayout>
 #include "ToolMenu.h"
-#include "../../manipulations/Brush/Brush.h"
+#include "../../manipulations/drawing/Brush/Brush.h"
 
 ToolMenu::ToolMenu(Workspace &workspace) {
     this->setStyleSheet("QWidget{background-color: blue;}");
     this->setLayout(new QVBoxLayout());
+
     QPushButton *circleButton = new QPushButton("Draw Circle");
     QPushButton *boxButton = new QPushButton("Draw Box");
 
