@@ -77,7 +77,7 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     connect(cannyEdgeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new CannyEdge(this->workspace));
     });
-    
+
     QAction *resizeAction = manipulationMenu->addAction("Resize");
     connect(resizeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Resizing(this->workspace));

@@ -73,6 +73,8 @@ Mat Resizing::applyManipulation() {
 
 void Resizing::updateParametersToDisplay() {
     delete this->parametersToDisplay;
+    this->scaleX = 0;
+    this->scaleY = 0;
     this->parametersToDisplay = new QWidget();
     this->parametersToDisplay->setLayout(new QVBoxLayout());
 
