@@ -11,6 +11,7 @@
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
 #include "../../manipulations/Panorama/Panorama.h"
+#include "../../manipulations/Resizing/Resizing.h"
 
 MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
@@ -34,7 +35,7 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     QAction *undoAction = editMenu->addAction("Undo");
     QAction *redoAction = editMenu->addAction("Redo");
     QAction *resizeAction = editMenu->addAction("Resize");
-    connect(monochromeAction, &QAction::triggered, this, [this]() {
+    connect(resizeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Resizing(this->workspace));
     });
 

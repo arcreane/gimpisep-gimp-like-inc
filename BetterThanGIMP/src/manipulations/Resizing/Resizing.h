@@ -1,5 +1,5 @@
 //
-// Created by louis on 17/06/2021.
+// Created by Louis Felli on 17/06/2021.
 //
 
 #ifndef BETTERTHANGIMP_RESIZING_H
@@ -13,11 +13,13 @@ public:
     Mat applyManipulation();
 
 private:
+    QWidget *parametersToDisplay;
+
     double scaleX;
     double scaleY;
     bool factor;
 
-    Mat resizing(Mat &image, double scaleX, double scaleY, bool factor);
+    void updateParametersToDisplay();
 };
 
 #endif //BETTERTHANGIMP_RESIZING_H
