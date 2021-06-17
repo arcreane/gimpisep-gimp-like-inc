@@ -4,9 +4,11 @@
 
 #include <opencv2/opencv.hpp>
 #include <QHBoxLayout>
+#include <QComboBox>
 
-#include "../../component/Slider/Slider.h"
 #include "Dilatation.h"
+#include "../../component/Slider/Slider.h"
+
 
 using namespace cv;
 
@@ -15,7 +17,20 @@ Dilatation::Dilatation(Workspace &w) : Manipulation(w) {
     this->options->setLayout(new QHBoxLayout());
 
 
-    this->inputSize = 0;
+    this->inputSize = 1;
+
+    this->inputKernel = MORPH_RECT;
+
+    QComboBox *chooseKernel = new QComboBox();
+    chooseKernel->addItem("RECT");
+    chooseKernel->addItem("CROSS");
+    chooseKernel->addItem("ELLIPSE");
+    connect(chooseKernel, &QComboBox::currentTextChanged, this, [this, chooseKernel]() {
+        this->inputKernel = chooseKernel->currentIndex();
+        updateImageDisplay();
+    });
+
+    this->options->layout()->addWidget(chooseKernel);
 
 
     Slider *sliderDilatationInput = new Slider("Dilatation Size ", Qt::Vertical, 1, 20, this->inputSize);
@@ -27,11 +42,14 @@ Dilatation::Dilatation(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(sliderDilatationInput);
 }
 
-Mat Dilatation::applyManipulation() {
-    Mat imageDestination;
-    Size dilatationSize = Size(this->inputSize, this->inputSize);
-    Mat kernel = getStructuringElement(MORPH_DILATE, dilatationSize);
-    dilate(this->imageSavedInMemory, imageDestination, kernel);
 
+Mat Dilatation::applyManipulation() {
+    
+    Size dilatationSize = Size(this->inputSize,this->inputSize);
+    Mat imageDestination;
+    Mat dilatationKernel = getStructuringElement(this->inputKernel, dilatationSize);
+    dilate(this->imageSavedInMemory,imageDestination, dilatationKernel);
+    
     return imageDestination;
+
 };
