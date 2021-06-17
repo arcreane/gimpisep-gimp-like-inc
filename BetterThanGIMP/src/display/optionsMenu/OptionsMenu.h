@@ -13,7 +13,7 @@ class OptionsMenu : public QWidget {
 public:
     OptionsMenu();
 
-    void setOptions(QWidget *, QString);
+    void setOptions(QWidget *options, QString name);
 
     void removeOptions();
 

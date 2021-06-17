@@ -16,7 +16,7 @@ private:
     QLabel *currentValue;
 
 public:
-    Slider(QString, int, int, int,int = 0);
+    Slider(QString name, int min, int max, int defaultValue, int offset = 0);
 
     QSlider *getSlider();
 
