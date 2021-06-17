@@ -16,7 +16,7 @@ Brightness::Brightness(Workspace &w) : Manipulation(w) {
     this->percentChange = 0;
 
 
-    Slider *sliderBrightness = new Slider("Brightness level", Qt::Vertical, 0, 1000, this->percentChange);
+    Slider *sliderBrightness = new Slider("Brightness level", Qt::Vertical, -100, 100, this->percentChange);
     connect(sliderBrightness->getSlider(), &QSlider::valueChanged, this, [this, sliderBrightness](int val) {
         this->percentChange = val;
         sliderBrightness->setCurrentValue(this->percentChange);
