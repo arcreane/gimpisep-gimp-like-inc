@@ -16,11 +16,11 @@ private:
     QLabel *currentValue;
 
 public:
-    Slider(QString name,Qt::Orientation orientation, int min, int max, int defaultValue, int offset = 0);
+    Slider(QString name, Qt::Orientation orientation, int min, int max, int defaultValue, int offset = 0);
 
     QSlider *getSlider();
 
-    void setCurrentValue(int);
+    void setCurrentValue(double newValue);
 };
 
 
