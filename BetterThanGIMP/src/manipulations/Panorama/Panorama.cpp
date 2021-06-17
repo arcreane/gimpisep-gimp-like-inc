@@ -183,7 +183,7 @@ bool Panorama::checkBlackRow(const Mat &gray_image, int y, const Rect &outputRec
         }
     }
 
-    // Si le nombre de pixels noirs est inferieur au seuil tolere, on renvoie false
+    // Si le nombre de pixels noirs est inferieur au seuil tolere, on renvoie true, sinon false
     if ((zeroCount / (float) gray_image.cols) > 0.0001) {
         return false;
     }

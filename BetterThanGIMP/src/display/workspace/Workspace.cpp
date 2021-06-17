@@ -10,11 +10,12 @@
 using namespace cv;
 
 Workspace::Workspace(const Mat &currentImage) : currentImage(currentImage) {
-    //TEMP
-    this->setStyleSheet("QLabel{background-color: red; color: blue;}");
     this->setAlignment(Qt::AlignCenter);
-    this->setText("You can drag and drop you image here !");
+    this->setText("You can drag and drop your image here !");
     this->setAcceptDrops(true);
+
+
+    this->setStyleSheet("QLabel{border-left: 2px solid black; border-right: 2px solid black;border-radius: 0; font-size: 20px; color: grey}");
 }
 
 void Workspace::updateImageDisplay() {
