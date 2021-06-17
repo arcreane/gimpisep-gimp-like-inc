@@ -5,7 +5,6 @@
 #ifndef BETTERTHANGIMP_CANNYEDGE_H
 #define BETTERTHANGIMP_CANNYEDGE_H
 
-
 #include "../Manipulation.h"
 
 class CannyEdge : public Manipulation {
