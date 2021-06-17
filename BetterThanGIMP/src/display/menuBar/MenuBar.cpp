@@ -5,12 +5,12 @@
 #include <iostream>
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
-#include <opencv2/highgui.hpp>
 
 #include "MenuBar.h"
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
 #include "../../manipulations/Panorama/Panorama.h"
+#include "../../manipulations/Brightness/Brightness.h"
 
 MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
@@ -54,8 +54,11 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
     QAction *expositionAction = filterMenu->addAction("Exposition");
     QAction *erosionAction = filterMenu->addAction("Erosion");
+
     QAction *brightnessAction = filterMenu->addAction("Brightness");
-    //connect(brightnessAction, &QAction::triggered, this, &MenuBar::brightness);
+    connect(brightnessAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Brightness(this->workspace));
+    });
 
     QAction *blurAction = filterMenu->addAction("Blur");
     QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");

@@ -11,7 +11,7 @@ set(REQUIRED_LIBS Core Gui Widgets)
 set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets)
 set(CMAKE_PREFIX_PATH "/opt/Qt5.12.10/5.12.10/gcc_64/lib/cmake")
 
-add_executable(${PROJECT_NAME} src/main.cpp src/display/Window.cpp src/display/Window.h src/display/workspace/Workspace.cpp src/display/workspace/Workspace.h src/display/toolMenu/ToolMenu.cpp src/display/toolMenu/ToolMenu.h src/display/optionsMenu/OptionsMenu.cpp src/display/optionsMenu/OptionsMenu.h src/display/menuBar/MenuBar.cpp src/display/menuBar/MenuBar.h src/manipulations/dilatation.cpp src/manipulations/erosion.cpp src/manipulations/resizing.cpp src/manipulations/brightness.cpp src/manipulations/Manipulation.cpp src/manipulations/Manipulation.h src/manipulations/Monochrome/Monochrome.cpp src/manipulations/Monochrome/Monochrome.h src/manipulations/CannyEdge/CannyEdge.cpp src/manipulations/CannyEdge/CannyEdge.h src/component/Slider/Slider.cpp src/component/Slider/Slider.h src/manipulations/Panorama/Panorama.cpp src/manipulations/Panorama/Panorama.h src/manipulations/Brush/Brush.cpp src/manipulations/Brush/Brush.h)
+add_executable(${PROJECT_NAME} src/main.cpp src/display/Window.cpp src/display/Window.h src/display/workspace/Workspace.cpp src/display/workspace/Workspace.h src/display/toolMenu/ToolMenu.cpp src/display/toolMenu/ToolMenu.h src/display/optionsMenu/OptionsMenu.cpp src/display/optionsMenu/OptionsMenu.h src/display/menuBar/MenuBar.cpp src/display/menuBar/MenuBar.h src/manipulations/dilatation.cpp src/manipulations/erosion.cpp src/manipulations/resizing.cpp src/manipulations/Manipulation.cpp src/manipulations/Manipulation.h src/manipulations/Monochrome/Monochrome.cpp src/manipulations/Monochrome/Monochrome.h src/manipulations/CannyEdge/CannyEdge.cpp src/manipulations/CannyEdge/CannyEdge.h src/component/Slider/Slider.cpp src/component/Slider/Slider.h src/manipulations/Panorama/Panorama.cpp src/manipulations/Panorama/Panorama.h src/manipulations/Brush/Brush.cpp src/manipulations/Brush/Brush.h src/manipulations/Panorama/Panorama.cpp src/manipulations/Brightness/Brightness.cpp src/manipulations/Brightness/Brightness.h)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "
@@ -19,7 +19,7 @@ if (NOT CMAKE_PREFIX_PATH)
 endif ()
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
-find_package( OpenCV REQUIRED )
+find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
-target_link_libraries( ${PROJECT_NAME} ${OpenCV_LIBS} )
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})

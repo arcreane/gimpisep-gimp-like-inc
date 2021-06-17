@@ -1,19 +1,22 @@
-#ifndef BETTERTHANGIMP_CANNYEDGE_H
-#define BETTERTHANGIMP_CANNYEDGE_H
+//
+// Created by Remi Genin on 17/06/2021.
+//
 
+#ifndef BETTERTHANGIMP_BRIGHTNESS_H
+#define BETTERTHANGIMP_BRIGHTNESS_H
 
 #include "../Manipulation.h"
+#include "../../display/workspace/Workspace.h"
 
 class Brightness : public Manipulation {
 public:
     Brightness(Workspace &workspace);
-    Mat applyManipulation();
+    Mat applyManipulation() override;
 
 private:
-    int percentChange;
+    double percentChange;
 
-    Mat Brightness(Mat &image, int percentChange);
+    Mat brightness(Mat &image, double percentChange);
 };
 
-
-#endif //BETTERTHANGIMP_CANNYEDGE_H
+#endif //BETTERTHANGIMP_BRIGHTNESS_H
