@@ -9,6 +9,7 @@
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
 #include "../../manipulations/Panorama/Panorama.h"
+#include "../../manipulations/Resizing/Resizing.h"
 #include "../../manipulations/Brightness/Brightness.h"
 #include "../../manipulations/Blur/Blur.h"
 #include "../../manipulations/Erosion/Erosion.h"
@@ -37,7 +38,6 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
     QMenu *editMenu = this->addMenu(("&Edit"));
     QAction *undoAction = editMenu->addAction("Undo");
-
 
     QMenu *manipulationMenu = this->addMenu(("&Manipulation"));
 
@@ -81,8 +81,10 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
         this->emit newManipulationSelected(new CannyEdge(this->workspace));
     });
 
-
     QAction *resizeAction = manipulationMenu->addAction("Resize");
+    connect(resizeAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Resizing(this->workspace));
+    });
 }
 
 void MenuBar::closeApplication() {
