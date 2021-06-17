@@ -34,7 +34,9 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     QAction *undoAction = editMenu->addAction("Undo");
     QAction *redoAction = editMenu->addAction("Redo");
     QAction *resizeAction = editMenu->addAction("Resize");
-
+    connect(monochromeAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Resizing(this->workspace));
+    });
 
     QMenu *filterMenu = this->addMenu(("&Transformation"));
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
