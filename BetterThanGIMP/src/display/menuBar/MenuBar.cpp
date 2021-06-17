@@ -12,6 +12,7 @@
 #include "../../manipulations/CannyEdge/CannyEdge.h"
 #include "../../manipulations/Panorama/Panorama.h"
 #include "../../manipulations/Erosion/Erosion.h"
+#include "../../manipulations/Dilatation/Dilatation.h"
 
 MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
@@ -39,6 +40,9 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
     QMenu *filterMenu = this->addMenu(("&Transformation"));
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
+    connect(dilatationAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Dilatation(this->workspace));
+    });
 
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
     connect(monochromeAction, &QAction::triggered, this, [this]() {
