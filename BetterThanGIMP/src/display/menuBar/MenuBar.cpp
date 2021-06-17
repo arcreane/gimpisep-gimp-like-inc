@@ -10,6 +10,7 @@
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
 #include "../../manipulations/Panorama/Panorama.h"
+#include "../../manipulations/Blur/Blur.h"
 #include "../../manipulations/Erosion/Erosion.h"
 #include "../../manipulations/Dilatation/Dilatation.h"
 
@@ -67,8 +68,10 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     QAction *brightnessAction = filterMenu->addAction("Brightness");
     //connect(brightnessAction, &QAction::triggered, this, &MenuBar::brightness);
 
-    QAction *blurAction = filterMenu->addAction("Blur");
     QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");
+    connect(gaussianBlurAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Blur(this->workspace));
+    });
 
     QAction *cannyEdge = filterMenu->addAction("Canny Edge");
     connect(cannyEdge, &QAction::triggered, this, [this]() {
