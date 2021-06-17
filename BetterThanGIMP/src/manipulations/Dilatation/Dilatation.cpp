@@ -33,7 +33,7 @@ Dilatation::Dilatation(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(chooseKernel);
 
 
-    Slider *sliderDilatationInput = new Slider("Dilatation Size ", Qt::Vertical, 1, 20, this->inputSize);
+    Slider *sliderDilatationInput = new Slider("Dilatation Size ", Qt::Vertical, 1, 50, this->inputSize);
     connect(sliderDilatationInput->getSlider(), &QSlider::valueChanged, this, [this, sliderDilatationInput](int val) {
         this->inputSize = val;
         sliderDilatationInput->setCurrentValue(this->inputSize);
