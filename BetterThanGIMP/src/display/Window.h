@@ -37,6 +37,8 @@ private slots :
 
     void saveOnDisk();
 
+    void exportImage(QString path);
+
 public:
     Window();
 };
