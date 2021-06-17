@@ -29,14 +29,15 @@ Slider::Slider(QString name, Qt::Orientation orientation, int min, int max, int 
         sliderInfo->setLayout(new QHBoxLayout);
 
         sliderInfo->layout()->addWidget(sliderTitle);
-        this->layout()->setAlignment(sliderTitle, Qt::AlignHCenter);
+        this->layout()->setAlignment(sliderTitle, Qt::AlignVCenter);
+
         sliderInfo->layout()->addWidget(this->currentValue);
-        this->layout()->setAlignment(this->currentValue, Qt::AlignHCenter);
+        this->layout()->setAlignment(this->currentValue, Qt::AlignVCenter);
 
         this->layout()->addWidget(sliderInfo);
 
         this->layout()->addWidget(this->slider);
-        this->layout()->setAlignment(this->slider, Qt::AlignHCenter);
+        this->layout()->setAlignment(this->slider, Qt::AlignVCenter);
     }
 
 }

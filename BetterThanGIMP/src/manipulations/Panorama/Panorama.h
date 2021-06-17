@@ -5,9 +5,10 @@
 #ifndef BETTERTHANGIMP_PANORAMA_H
 #define BETTERTHANGIMP_PANORAMA_H
 
+#include <QScrollArea>
+
 #include "../Manipulation.h"
 #include "../../display/workspace/Workspace.h"
-#include <QScrollArea>
 
 
 class Panorama : public Manipulation {

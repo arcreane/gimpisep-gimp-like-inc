@@ -3,6 +3,7 @@
 //
 
 #include <opencv2/imgproc.hpp>
+
 #include "Circle.h"
 
 Circle::Circle(Workspace &w) : Drawing(w) {

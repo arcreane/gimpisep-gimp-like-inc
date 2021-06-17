@@ -6,22 +6,23 @@
 #define BETTERTHANGIMP_WINDOW_H
 
 
+#include <opencv2/opencv.hpp>
 #include <QGridLayout>
 #include <QMenuBar>
 #include <QMainWindow>
-#include "toolMenu/ToolMenu.h"
-#include "workspace/Workspace.h"
+
+#include "drawingMenu/DrawingMenu.h"
 #include "optionsMenu/OptionsMenu.h"
 #include "menuBar/MenuBar.h"
+#include "workspace/Workspace.h"
 #include "../manipulations/Manipulation.h"
-#include <opencv2/opencv.hpp>
 
 class Window : public QWidget {
 Q_OBJECT
 private:
     QHBoxLayout *layout;
     MenuBar *mainMenu;
-    ToolMenu *toolMenu;
+    DrawingMenu *drawingMenu;
     Workspace *workspace;
     OptionsMenu *manipulationOptionsMenu;
     cv::Mat image;

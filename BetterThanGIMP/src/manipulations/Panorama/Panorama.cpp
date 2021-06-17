@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QFileDialog>
 #include <QScrollArea>
+
 #include "Panorama.h"
 
 using namespace std;
@@ -48,7 +49,6 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
             error.setText("Can't create a panorama out of less than 2 images!");
             error.exec();
         }
-
     });
 
     QCheckBox *correctStitching = new QCheckBox(tr("Correct stitching"));
@@ -60,8 +60,6 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(correctStitching);
     this->options->layout()->addWidget(applyStitching);
     this->options->layout()->setMargin(0);
-    this->options->setStyleSheet("QWidget{background-color: green;}");
-
 }
 
 void Panorama::displayImagesThumbnails() {
@@ -74,7 +72,7 @@ void Panorama::displayImagesThumbnails() {
     for (Mat image : this->images_to_stitch) {
         Mat tmp;
         QLabel *thumbnail = new QLabel();
-        thumbnail->setMaximumWidth(this->options->width() - 35);
+        thumbnail->setMaximumWidth(this->options->width() - 45);
         cvtColor(image, tmp, COLOR_BGR2RGB);
         QImage qImage = QImage((uchar *) tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
                 .scaled(thumbnail->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -104,6 +102,8 @@ Mat Panorama::stitch(vector<Mat> images_to_stitch) {
         QMessageBox error;
         error.setText("Can't perform requested manipulation on the current image!");
         error.exec();
+        Mat empty;
+        return empty;
     }
 
     // Retourne le panorama resultant
@@ -112,7 +112,6 @@ Mat Panorama::stitch(vector<Mat> images_to_stitch) {
         return panorama_cropped;
     }
     return panorama;
-
 }
 
 // Rogne le panorama apres sa construction pour retirer les eventuels bords noirs

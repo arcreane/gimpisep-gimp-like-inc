@@ -3,13 +3,14 @@
 //
 
 #include <QPushButton>
-#include <QLayout>
-#include "ToolMenu.h"
+#include <QVBoxLayout>
+
+#include "DrawingMenu.h"
 #include "../../manipulations/drawing/Brush/Brush.h"
 #include "../../manipulations/drawing/Circle/Circle.h"
 #include "../../manipulations/drawing/Box/Box.h"
 
-ToolMenu::ToolMenu(Workspace &workspace) {
+DrawingMenu::DrawingMenu(Workspace &workspace) {
     this->setLayout(new QVBoxLayout());
 
     QPushButton *circleButton = new QPushButton("Draw Circle");
@@ -31,7 +32,6 @@ ToolMenu::ToolMenu(Workspace &workspace) {
     this->layout()->addWidget(boxButton);
     this->layout()->addWidget(brushButton);
 
-    this->setStyleSheet(
-            "QWidget{padding: 20px; border: 2px solid grey;}"
-            "QWidget:hover{background-color: lightGrey}");
+    this->setStyleSheet("QWidget{padding: 20px; border: 2px solid grey;}"
+                        "QWidget:hover{background-color: lightGrey}");
 }

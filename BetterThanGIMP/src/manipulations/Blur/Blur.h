@@ -17,8 +17,6 @@ private:
     int blurKernelSize;
 
     Mat blur(Mat& image, int blurKernelSize);
-
-
 };
 
 

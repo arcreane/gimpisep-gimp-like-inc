@@ -9,6 +9,7 @@
 #include <opencv2/core/mat.hpp>
 #include <iostream>
 #include <QWidget>
+
 #include "../display/workspace/Workspace.h"
 
 using namespace cv;

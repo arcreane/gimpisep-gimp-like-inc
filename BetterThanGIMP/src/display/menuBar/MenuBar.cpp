@@ -2,7 +2,6 @@
 // Created by yakiimo on 5/10/21.
 //
 
-#include <iostream>
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
 
@@ -37,50 +36,50 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
     QMenu *editMenu = this->addMenu(("&Edit"));
     QAction *undoAction = editMenu->addAction("Undo");
-    QAction *redoAction = editMenu->addAction("Redo");
-    QAction *resizeAction = editMenu->addAction("Resize");
 
 
-    QMenu *filterMenu = this->addMenu(("&Transformation"));
-    QAction *dilatationAction = filterMenu->addAction("Dilatation");
+    QMenu *manipulationMenu = this->addMenu(("&Manipulation"));
+
+    QAction *dilatationAction = manipulationMenu->addAction("Dilatation");
     connect(dilatationAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Dilatation(this->workspace));
     });
 
-    QAction *monochromeAction = filterMenu->addAction("Monochrome");
+    QAction *monochromeAction = manipulationMenu->addAction("Monochrome");
     connect(monochromeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Monochrome(this->workspace));
     });
 
-    QAction *panoramaAction = filterMenu->addAction("Panorama");
+    QAction *panoramaAction = manipulationMenu->addAction("Panorama");
     connect(panoramaAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Panorama(this->workspace));
     });
 
-    QAction *contrastAction = filterMenu->addAction("Contrast");
+    QAction *contrastAction = manipulationMenu->addAction("Contrast");
     //connect(contrastAction, SLOT(triggered()), this, SLOT(applyTransformation(image_to_bright)));
 
-    QAction *expositionAction = filterMenu->addAction("Exposition");
-    
-    QAction *erosionAction = filterMenu->addAction("Erosion");
+    QAction *erosionAction = manipulationMenu->addAction("Erosion");
     connect(erosionAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Erosion(this->workspace));
     });
 
-    QAction *brightnessAction = filterMenu->addAction("Brightness");
+    QAction *brightnessAction = manipulationMenu->addAction("Brightness");
     connect(brightnessAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Brightness(this->workspace));
     });
 
-    QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");
+    QAction *gaussianBlurAction = manipulationMenu->addAction("Gaussian Blur");
     connect(gaussianBlurAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new Blur(this->workspace));
     });
 
-    QAction *cannyEdge = filterMenu->addAction("Canny Edge");
-    connect(cannyEdge, &QAction::triggered, this, [this]() {
+    QAction *cannyEdgeAction = manipulationMenu->addAction("Canny Edge");
+    connect(cannyEdgeAction, &QAction::triggered, this, [this]() {
         this->emit newManipulationSelected(new CannyEdge(this->workspace));
     });
+
+
+    QAction *resizeAction = manipulationMenu->addAction("Resize");
 }
 
 void MenuBar::closeApplication() {
@@ -95,7 +94,7 @@ void MenuBar::openFile() {
     emit onOpenEmitFilePath(path);
 }
 
-void MenuBar::exportImage(){
+void MenuBar::exportImage() {
     QString path;
     QString selectedFilter;
     path = QFileDialog::getSaveFileName(nullptr, "Export as", "/",

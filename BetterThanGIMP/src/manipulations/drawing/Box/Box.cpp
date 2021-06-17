@@ -3,6 +3,7 @@
 //
 
 #include <opencv2/imgproc.hpp>
+
 #include "Box.h"
 
 Box::Box(Workspace &w) : Drawing(w) {
@@ -35,5 +36,5 @@ Mat Box::drawBox(Mat &image, Point startCorner, Point endCorner, int size, Scala
 
 Mat Box::applyManipulation() {
     return drawBox(this->imageSavedInMemory, this->startCorner, this->mouseCoordinates, this->brushSize,
-                      Scalar(this->blue, this->green, this->red));
+                   Scalar(this->blue, this->green, this->red));
 };

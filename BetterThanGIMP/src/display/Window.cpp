@@ -2,11 +2,9 @@
 // Created by yakiimo on 5/10/21.
 //
 
-#include <QStyleFactory>
-#include <QPushButton>
 #include <iostream>
 #include <QMessageBox>
-#include <QFileDialog>
+
 #include "Window.h"
 
 Window::Window() {
@@ -24,15 +22,15 @@ Window::Window() {
 
     this->manipulationOptionsMenu = new OptionsMenu();
 
-    this->toolMenu = new ToolMenu(*this->workspace);
-    connect(this->toolMenu, &ToolMenu::newManipulationSelected, this, &Window::setCurrentManipulation);
+    this->drawingMenu = new DrawingMenu(*this->workspace);
+    connect(this->drawingMenu, &DrawingMenu::newManipulationSelected, this, &Window::setCurrentManipulation);
 
     this->setLayout(layout);
     layout->setMenuBar(mainMenu);
 
-    layout->addWidget(toolMenu, 1);
-    layout->addWidget(workspace, 7);
-    layout->addWidget(manipulationOptionsMenu, 2);
+    layout->addWidget(drawingMenu, 10);
+    layout->addWidget(workspace, 60);
+    layout->addWidget(manipulationOptionsMenu, 30);
 
     this->setMinimumSize(1280, 720);
 
@@ -79,10 +77,12 @@ void Window::setCurrentManipulation(Manipulation *manipulation) {
         this->currentManipulation = manipulation;
         this->currentManipulation->setImageSavedInMemory(this->image);
     } else {
-        std::cout << "Error loading image" << std::endl;
+        std::cout << "Error: The image in memory is empty, can't set the manipulation!" << std::endl;
         QMessageBox error;
         error.setText("Can't perform requested manipulation on an empty image!");
         error.exec();
+
+        delete manipulation;
     }
 }
 
@@ -101,9 +101,6 @@ void Window::saveOnDisk() {
         //TODO sauver l'image dans un dossier
     }
 }
-
-
-
 
 
 void Window::exportImage(QString path) {
@@ -125,7 +122,7 @@ void Window::exportImage(QString path) {
             QMessageBox error;
             error.setText("You must specify a path to store the image");
             error.exec();
-        } else if(filePath.find('.')==-1) {
+        } else if (filePath.find('.') == -1) {
             std::cout << "No extension" << std::endl;
             QMessageBox error;
             error.setText("You must specify an extension for the image");

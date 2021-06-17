@@ -3,8 +3,8 @@
 //
 
 #include <opencv2/opencv.hpp>
-#include <QSlider>
 #include <QHBoxLayout>
+
 #include "CannyEdge.h"
 #include "../../component/Slider/Slider.h"
 
@@ -12,12 +12,15 @@ using namespace cv;
 
 CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     this->name = "Canny edge";
-    this->options->setLayout(new QHBoxLayout());
+    this->options->setLayout(new QVBoxLayout());
 
     //We initialize our parameters
     this->threshold1 = 0;
     this->threshold2 = 0;
     this->kernelSize = 0;
+
+    QWidget *thresholdSliders = new QWidget();
+    thresholdSliders->setLayout(new QHBoxLayout());
 
     Slider *sliderThreshold1 = new Slider("Threshold 1", Qt::Vertical, 0, 1000, this->threshold1);
     connect(sliderThreshold1->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold1](int val) {
@@ -25,7 +28,7 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
         sliderThreshold1->setCurrentValue(this->threshold1);
         updateImageDisplay();
     });
-    this->options->layout()->addWidget(sliderThreshold1);
+    thresholdSliders->layout()->addWidget(sliderThreshold1);
 
     Slider *sliderThreshold2 = new Slider("Threshold 2", Qt::Vertical, 0, 1000, this->threshold2);
     connect(sliderThreshold2->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold2](int val) {
@@ -33,9 +36,11 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
         sliderThreshold2->setCurrentValue(this->threshold2);
         updateImageDisplay();
     });
-    this->options->layout()->addWidget(sliderThreshold2);
+    thresholdSliders->layout()->addWidget(sliderThreshold2);
 
-    Slider *sliderKernelSize = new Slider("Blur Kernel Size", Qt::Vertical, -1, 10, this->kernelSize, -1);
+    this->options->layout()->addWidget(thresholdSliders);
+
+    Slider *sliderKernelSize = new Slider("Blur Kernel Size", Qt::Horizontal, -1, 10, this->kernelSize, -1);
     connect(sliderKernelSize->getSlider(), &QSlider::valueChanged, this, [this, sliderKernelSize](int val) {
         val = val < 0 ? 0 : val * 2 + 1;
         this->kernelSize = val;

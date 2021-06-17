@@ -2,15 +2,15 @@
 // Created by yakiimo on 6/17/21.
 //
 
-#include "Dilatation.h"
-#include <QSlider>
-#include <QHBoxLayout>
-#include "../../component/Slider/Slider.h"
 #include <opencv2/opencv.hpp>
+#include <QHBoxLayout>
+
+#include "../../component/Slider/Slider.h"
+#include "Dilatation.h"
 
 using namespace cv;
 
-Dilatation::Dilatation(Workspace &w) : Manipulation(w){
+Dilatation::Dilatation(Workspace &w) : Manipulation(w) {
     this->name = "Dilatation";
     this->options->setLayout(new QHBoxLayout());
 
@@ -27,12 +27,12 @@ Dilatation::Dilatation(Workspace &w) : Manipulation(w){
     this->options->layout()->addWidget(sliderDilatationInput);
 }
 
-Mat Dilatation::dilatation(Mat &image, int inputSize){
+Mat Dilatation::dilatation(Mat &image, int inputSize) {
 
     Mat imageDestination;
-    Size dilatationSize = Size(inputSize,inputSize);
-    Mat kernel = getStructuringElement(MORPH_DILATE,dilatationSize);
-    dilate(image,imageDestination,kernel);
+    Size dilatationSize = Size(inputSize, inputSize);
+    Mat kernel = getStructuringElement(MORPH_DILATE, dilatationSize);
+    dilate(image, imageDestination, kernel);
 
     return imageDestination;
 }
