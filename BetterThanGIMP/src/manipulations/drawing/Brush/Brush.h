@@ -15,7 +15,7 @@ public:
     Mat applyManipulation() override;
 
 private:
-    Mat draw(Mat &, Point, int, Scalar);
+    Mat draw(Mat &onImage, Point coordinates, int brushSize, Scalar color);
 
 
 };

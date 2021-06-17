@@ -15,7 +15,8 @@ Workspace::Workspace(const Mat &currentImage) : currentImage(currentImage) {
     this->setAcceptDrops(true);
 
 
-    this->setStyleSheet("QLabel{border-left: 2px solid black; border-right: 2px solid black;border-radius: 0; font-size: 20px; color: grey}");
+    this->setStyleSheet(
+            "QLabel{border-left: 2px solid black; border-right: 2px solid black;border-radius: 0; font-size: 20px; color: grey}");
 }
 
 void Workspace::updateImageDisplay() {
@@ -46,9 +47,20 @@ void Workspace::dragEnterEvent(QDragEnterEvent *event) {
     event->accept();
 }
 
-void Workspace::mouseReleaseEvent(QMouseEvent *) {
 
-    std::cout << "xReal   yReal " << std::endl;
+void Workspace::mousePressEvent(QMouseEvent *ev) {
+    if (this->pixmap()) {
+        Point coordOnImage = convertCoordinatesOnDisplayToCoordinatesOnImage(ev->x(), ev->y());
+        if (coordOnImage.x != -1 && coordOnImage.y != -1) {
+            emit mousePressed(coordOnImage);
+        }
+    }
+}
+
+void Workspace::mouseReleaseEvent(QMouseEvent *) {
+    if (this->pixmap()) {
+        emit mouseReleased();
+    }
 }
 
 void Workspace::mouseMoveEvent(QMouseEvent *ev) {
@@ -58,7 +70,6 @@ void Workspace::mouseMoveEvent(QMouseEvent *ev) {
             emit mouseMoved(coordOnImage);
         }
     }
-
 }
 
 Point Workspace::convertCoordinatesOnDisplayToCoordinatesOnImage(double xOnDisplayRaw, double yOnDisplayRaw) {

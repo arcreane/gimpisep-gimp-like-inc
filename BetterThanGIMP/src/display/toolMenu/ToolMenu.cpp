@@ -6,12 +6,15 @@
 #include <QLayout>
 #include "ToolMenu.h"
 #include "../../manipulations/drawing/Brush/Brush.h"
+#include "../../manipulations/drawing/Circle/Circle.h"
 
 ToolMenu::ToolMenu(Workspace &workspace) {
     this->setLayout(new QVBoxLayout());
 
     QPushButton *circleButton = new QPushButton("Draw Circle");
-    QPushButton *boxButton = new QPushButton("Draw Box");
+    connect(circleButton, &QPushButton::pressed, this, [this, &workspace]() {
+        this->emit newManipulationSelected(new Circle(workspace));
+    });
 
     QPushButton *brushButton = new QPushButton("Draw with brush");
     connect(brushButton, &QPushButton::pressed, this, [this, &workspace]() {
@@ -19,7 +22,6 @@ ToolMenu::ToolMenu(Workspace &workspace) {
     });
 
     this->layout()->addWidget(circleButton);
-    this->layout()->addWidget(boxButton);
     this->layout()->addWidget(brushButton);
 
     this->setStyleSheet(
