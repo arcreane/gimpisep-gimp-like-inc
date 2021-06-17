@@ -5,10 +5,23 @@
 #include <QPushButton>
 #include <QLayout>
 #include "ToolMenu.h"
+#include "../../manipulations/Brush/Brush.h"
 
-ToolMenu::ToolMenu(){
-    this->setStyleSheet("QWidget{background-color: blue;}");
-    QPushButton *circleButton = new QPushButton("Draw Circle", this);
-    circleButton->move(80,0);
-    QPushButton *boxButton = new QPushButton("Draw Box", this);
+ToolMenu::ToolMenu(Workspace &workspace) {
+    this->setLayout(new QVBoxLayout());
+    QPushButton *circleButton = new QPushButton("Draw Circle");
+    QPushButton *boxButton = new QPushButton("Draw Box");
+
+    QPushButton *brushButton = new QPushButton("Draw with brush");
+    connect(brushButton, &QPushButton::pressed, this, [this, &workspace]() {
+        this->emit newManipulationSelected(new Brush(workspace));
+    });
+
+    this->layout()->addWidget(circleButton);
+    this->layout()->addWidget(boxButton);
+    this->layout()->addWidget(brushButton);
+
+    this->setStyleSheet(
+            "QWidget{padding: 20px; border: 2px solid grey;}"
+            "QWidget:hover{background-color: lightGrey}");
 }

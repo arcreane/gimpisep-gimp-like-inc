@@ -7,10 +7,18 @@
 
 
 #include <QWidget>
+#include "../workspace/Workspace.h"
+#include "../../manipulations/Manipulation.h"
 
 class ToolMenu : public QWidget {
+Q_OBJECT
 public:
-    ToolMenu();
+    ToolMenu(Workspace &);
+
+public:
+signals:
+
+    void newManipulationSelected(Manipulation *);
 };
 
 

@@ -6,12 +6,13 @@
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
-#include "../../manipulations/monochrome.cpp"
 
 #include "MenuBar.h"
+#include "../../manipulations/Monochrome/Monochrome.h"
+#include "../../manipulations/CannyEdge/CannyEdge.h"
+#include "../../manipulations/Panorama/Panorama.h"
 
-MenuBar::MenuBar(Workspace *workspace){
-    this->workspace = workspace;
+MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
     QMenu *fileMenu = this->addMenu(("&File"));
 
@@ -20,11 +21,14 @@ MenuBar::MenuBar(Workspace *workspace){
     openAction->setShortcut(QKeySequence("Ctrl+O"));
 
     QAction *saveAction = fileMenu->addAction("Save");
+    connect(saveAction, &QAction::triggered, this, [this]() { this->emit saveOnDisk(); });
+    saveAction->setShortcut(QKeySequence("Ctrl+S"));
+
     QAction *exportAction = fileMenu->addAction("Export...");
 
     QAction *exitAction = fileMenu->addAction("Exit");
     connect(exitAction, &QAction::triggered, this, &MenuBar::closeApplication);
-    exitAction->setShortcut(QKeySequence("Ctrl+E"));
+    exitAction->setShortcut(QKeySequence("Ctrl+Q"));
 
     QMenu *editMenu = this->addMenu(("&Edit"));
     QAction *undoAction = editMenu->addAction("Undo");
@@ -36,7 +40,14 @@ MenuBar::MenuBar(Workspace *workspace){
     QAction *dilatationAction = filterMenu->addAction("Dilatation");
 
     QAction *monochromeAction = filterMenu->addAction("Monochrome");
-    connect(monochromeAction, &QAction::triggered, this, &MenuBar::monochrome);
+    connect(monochromeAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Monochrome(this->workspace));
+    });
+
+    QAction *panoramaAction = filterMenu->addAction("Panorama");
+    connect(panoramaAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Panorama(this->workspace));
+    });
 
     QAction *contrastAction = filterMenu->addAction("Contrast");
     //connect(contrastAction, SLOT(triggered()), this, SLOT(applyTransformation(image_to_bright)));
@@ -45,23 +56,23 @@ MenuBar::MenuBar(Workspace *workspace){
     QAction *erosionAction = filterMenu->addAction("Erosion");
     QAction *brightnessAction = filterMenu->addAction("Brightness");
     //connect(brightnessAction, &QAction::triggered, this, &MenuBar::brightness);
+
     QAction *blurAction = filterMenu->addAction("Blur");
     QAction *gaussianBlurAction = filterMenu->addAction("Gaussian Blur");
+
+    QAction *cannyEdge = filterMenu->addAction("Canny Edge");
+    connect(cannyEdge, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new CannyEdge(this->workspace));
+    });
 }
 
-void MenuBar::closeApplication(){
+void MenuBar::closeApplication() {
     exit(0);
 }
 
-void MenuBar::openFile(){
+void MenuBar::openFile() {
     QString path;
-    path = QFileDialog::getOpenFileName(workspace, "Open file", "/", "Image Files (*.png *gif * jpg *bmp *jpeg * jfif)");
-    emit updateWindowImage(path);
+    path = QFileDialog::getOpenFileName(nullptr, "Open file", "/",
+                                        "Image Files (*.png *gif * jpg *bmp *jpeg * jfif)");
+    emit onOpenEmitFilePath(path);
 }
-
-void MenuBar::monochrome(){
-    emit applyFilterImage(image_to_gray(this->workspace->workspaceImage));
-}
-
-
-

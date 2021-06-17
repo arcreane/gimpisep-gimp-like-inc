@@ -7,37 +7,82 @@
 #include <iostream>
 #include "Workspace.h"
 
-Workspace::Workspace(){
-    this->setStyleSheet("QLabel{background-color: red; color: blue;}");
-    this->setText("Hello World!");
+using namespace cv;
+
+Workspace::Workspace(const Mat &currentImage) : currentImage(currentImage) {
+    this->setAlignment(Qt::AlignCenter);
+    this->setText("You can drag and drop your image here !");
     this->setAcceptDrops(true);
+
+
+    this->setStyleSheet("QLabel{border-left: 2px solid black; border-right: 2px solid black;border-radius: 0; font-size: 20px; color: grey}");
 }
 
-void Workspace::updateImage(cv::Mat image){
-    cv::Mat tmp;
-    cv::cvtColor(image, tmp, cv::COLOR_BGR2RGB);
-    QImage qImage = QImage((uchar*)tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
+void Workspace::updateImageDisplay() {
+    Mat tmp;
+    cvtColor(currentImage, tmp, COLOR_BGR2RGB);
+    QImage qImage = QImage((uchar *) tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
             .scaled(this->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
     this->setPixmap(QPixmap::fromImage(qImage));
-    this->workspaceImage = tmp;
-    // Crée une image temporaire à partir du QPixmap affiché, récupérer data, taille etc.
-    // Lui appliquer la transformation
-
-    //this->setScaledContents(true);
-    //this->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
 }
 
-void Workspace::dropEvent(QDropEvent* event){
-    const QMimeData* mimeData = event->mimeData();
-    std::cout << "Drop event detected" << std::endl;
-    if(mimeData->hasUrls()){
-        std::cout << "Success" << std::endl;
-        emit updateWindowImage(mimeData->urls().at(0).toLocalFile());
+
+void Workspace::updateImageDisplay(Mat image) {
+    Mat tmp;
+    cvtColor(image, tmp, COLOR_BGR2RGB);
+    QImage qImage = QImage((uchar *) tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
+            .scaled(this->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    this->setPixmap(QPixmap::fromImage(qImage));
+}
+
+void Workspace::dropEvent(QDropEvent *event) {
+    const QMimeData *mimeData = event->mimeData();
+    if (mimeData->hasUrls()) {
+        emit onDropEmitFilePath(mimeData->urls().at(0).toLocalFile());
     }
 }
 
 void Workspace::dragEnterEvent(QDragEnterEvent *event) {
-    std::cout << "Drag enter event" << std::endl;
     event->accept();
-};
+}
+
+void Workspace::mouseReleaseEvent(QMouseEvent *) {
+
+    std::cout << "xReal   yReal " << std::endl;
+}
+
+void Workspace::mouseMoveEvent(QMouseEvent *ev) {
+    if (this->pixmap()) {
+        Point coordOnImage = convertCoordinatesOnDisplayToCoordinatesOnImage(ev->x(), ev->y());
+        if (coordOnImage.x != -1 && coordOnImage.y != -1) {
+            emit mouseMoved(coordOnImage);
+        }
+    }
+
+}
+
+Point Workspace::convertCoordinatesOnDisplayToCoordinatesOnImage(double xOnDisplayRaw, double yOnDisplayRaw) {
+    double onDisplayWidth = this->pixmap()->rect().width();
+    double onDisplayHeight = this->pixmap()->rect().height();
+
+    double onRealWidth = this->currentImage.cols;
+    double onRealHeight = this->currentImage.rows;
+
+    double xOffset = (this->width() - onDisplayWidth) / 2;
+    double yOffset = (this->height() - onDisplayHeight) / 2;
+
+    double xRatio = onRealWidth / onDisplayWidth;
+    double yRatio = onRealHeight / onDisplayHeight;
+
+    double xOnDisplay = xOnDisplayRaw - xOffset;
+    double yOnDisplay = yOnDisplayRaw - yOffset;
+
+    int xOnRealImage = (int) xOnDisplay * xRatio;
+    int yOnRealImage = (int) yOnDisplay * yRatio;
+
+    if ((xOnRealImage >= 0 && xOnRealImage <= onRealWidth)
+        && (yOnRealImage >= 0 && yOnRealImage <= onRealHeight)) {
+        return Point(xOnRealImage, yOnRealImage);
+    }
+    return Point(-1, -1);
+}

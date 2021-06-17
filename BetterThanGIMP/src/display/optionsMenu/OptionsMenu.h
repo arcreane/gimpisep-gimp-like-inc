@@ -7,18 +7,21 @@
 
 
 #include <QWidget>
+#include <QGridLayout>
 
 class OptionsMenu : public QWidget {
 public:
     OptionsMenu();
 
-public slots:
-    void setValue(int);
+    void setOptions(QWidget *options, QString name);
+
+    void removeOptions();
+
+private:
+    QVBoxLayout *layout;
+    QWidget *currentOptions;
+    QLabel *title;
 };
-
-
-
-
 
 
 #endif //BETTERTHANGIMP_OPTIONSMENU_H

@@ -13,23 +13,32 @@
 #include "workspace/Workspace.h"
 #include "optionsMenu/OptionsMenu.h"
 #include "menuBar/MenuBar.h"
+#include "../manipulations/Manipulation.h"
 #include <opencv2/opencv.hpp>
 
 class Window : public QWidget {
 Q_OBJECT
 private:
-    QGridLayout *layout;
+    QHBoxLayout *layout;
     MenuBar *mainMenu;
     ToolMenu *toolMenu;
     Workspace *workspace;
-    OptionsMenu *optionsMenu;
+    OptionsMenu *manipulationOptionsMenu;
     cv::Mat image;
-    void loadImageFromString(QString);
-    void loadImage(cv::Mat);
+    Manipulation *currentManipulation;
+
+    void resizeEvent(QResizeEvent *e) override;
+
+private slots :
+
+    void loadImageFromString(QString path);
+
+    void setCurrentManipulation(Manipulation *manipulationToUse);
+
+    void saveOnDisk();
 
 public:
     Window();
 };
-
 
 #endif //BETTERTHANGIMP_WINDOW_H

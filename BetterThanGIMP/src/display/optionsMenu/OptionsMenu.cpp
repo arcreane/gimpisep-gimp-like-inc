@@ -4,16 +4,32 @@
 
 #include <QSlider>
 #include <iostream>
+#include <QLayoutItem>
+#include <QLabel>
 #include "OptionsMenu.h"
 
-OptionsMenu::OptionsMenu(){
-    this->setStyleSheet("QWidget{background-color: green;}");
-    QSlider *slider = new QSlider(Qt::Horizontal,this);
-    slider->setRange(0,100);
-    slider->setValue(50);
-    connect(slider, &QSlider::valueChanged, this, &OptionsMenu::setValue);
+OptionsMenu::OptionsMenu() {
+    layout = new QVBoxLayout(this);
+    this->currentOptions = new QWidget();
+
+    this->title = new QLabel("There is no manipulation for the moment...");
+    this->title->setAlignment(Qt::AlignCenter);
+    this->title->setMaximumHeight(20);
+
+
+    this->layout->addWidget(this->title);
+    this->layout->addWidget(currentOptions);
 }
 
-void OptionsMenu::setValue(int i){
-    std::cout << i << std::endl;
+void OptionsMenu::setOptions(QWidget *options, QString manipulationName) {
+    delete this->currentOptions;
+    this->title->setText("Options for the manipulation " + manipulationName);
+    this->currentOptions = options;
+    this->layout->addWidget(currentOptions);
+}
+
+void OptionsMenu::removeOptions() {
+    this->title->setText("There is no manipulation for the moment...");
+    delete this->currentOptions;
+    this->currentOptions = nullptr;
 }
