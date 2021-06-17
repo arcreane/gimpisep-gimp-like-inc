@@ -5,7 +5,6 @@
 #include <iostream>
 #include <QFileDialog>
 #include <opencv2/opencv.hpp>
-#include <opencv2/highgui.hpp>
 
 #include "MenuBar.h"
 #include "../../manipulations/Monochrome/Monochrome.h"
@@ -24,7 +23,9 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     connect(saveAction, &QAction::triggered, this, [this]() { this->emit saveOnDisk(); });
     saveAction->setShortcut(QKeySequence("Ctrl+S"));
 
-    QAction *exportAction = fileMenu->addAction("Export...");
+    QAction *exportAction = fileMenu->addAction("Export as...");
+    connect(exportAction, &QAction::triggered, this, &MenuBar::exportImage);
+    exportAction->setShortcut(QKeySequence("Ctrl+E"));
 
     QAction *exitAction = fileMenu->addAction("Exit");
     connect(exitAction, &QAction::triggered, this, &MenuBar::closeApplication);
@@ -73,6 +74,20 @@ void MenuBar::closeApplication() {
 void MenuBar::openFile() {
     QString path;
     path = QFileDialog::getOpenFileName(nullptr, "Open file", "/",
-                                        "Image Files (*.png *gif * jpg *bmp *jpeg * jfif)");
+                                        "Image Files (*png *jpg *bmp *jpeg *jfif)");
+
     emit onOpenEmitFilePath(path);
+}
+
+void MenuBar::exportImage(){
+    QString path;
+    QString selectedFilter;
+    path = QFileDialog::getSaveFileName(nullptr, "Export as", "/",
+                                        "PNG (*.png);; "
+                                        "JPEG (*.jpg, *.jpeg);;"
+                                        "BMP (*.bmp);;"
+                                        "JFIF (*.jfif);;"
+                                        "All files (*.*);;",
+                                        &selectedFilter);
+    emit onSaveEmitFilePath(path);
 }

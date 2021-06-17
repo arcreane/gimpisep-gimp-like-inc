@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <iostream>
 #include <QMessageBox>
+#include <QFileDialog>
 #include "Window.h"
 
 Window::Window() {
@@ -17,6 +18,7 @@ Window::Window() {
 
     this->mainMenu = new MenuBar(*this->workspace);
     connect(this->mainMenu, &MenuBar::onOpenEmitFilePath, this, &Window::loadImageFromString);
+    connect(this->mainMenu, &MenuBar::onSaveEmitFilePath, this, &Window::exportImage);
     connect(this->mainMenu, &MenuBar::newManipulationSelected, this, &Window::setCurrentManipulation);
     connect(this->mainMenu, &MenuBar::saveOnDisk, this, &Window::saveOnDisk);
 
@@ -85,11 +87,54 @@ void Window::setCurrentManipulation(Manipulation *manipulation) {
 }
 
 void Window::saveOnDisk() {
-    if (currentManipulation != nullptr) {
-        this->image = currentManipulation->applyManipulation();
+    if (this->image.empty()) {
+        std::cout << "No image" << std::endl;
+        QMessageBox error;
+        error.setText("There is no image to be saved!");
+        error.exec();
     }
-    imwrite("saved.png", this->image);
-    //TODO sauver l'image dans un dossier
+    if (!this->image.empty()) {
+        if (currentManipulation != nullptr) {
+            this->image = currentManipulation->applyManipulation();
+        }
+        imwrite("saved.png", this->image);
+        //TODO sauver l'image dans un dossier
+    }
+}
+
+
+
+
+
+void Window::exportImage(QString path) {
+
+    if (this->image.empty()) {
+        std::cout << "No image" << std::endl;
+        QMessageBox error;
+        error.setText("There is no image to be saved!");
+        error.exec();
+    }
+    if (!this->image.empty()) {
+        if (currentManipulation != nullptr) {
+            this->image = currentManipulation->applyManipulation();
+        }
+        std::string filePath = path.toUtf8().constData();
+
+        if (filePath == "") {
+            std::cout << "No path" << std::endl;
+            QMessageBox error;
+            error.setText("You must specify a path to store the image");
+            error.exec();
+        } else if(filePath.find('.')==-1) {
+            std::cout << "No extension" << std::endl;
+            QMessageBox error;
+            error.setText("You must specify an extension for the image");
+            error.exec();
+        } else {
+            imwrite(filePath, this->image);
+        }
+    }
+
 }
 
 void Window::resizeEvent(QResizeEvent *e) {
