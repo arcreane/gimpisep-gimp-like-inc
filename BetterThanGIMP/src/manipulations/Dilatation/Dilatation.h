@@ -17,8 +17,6 @@ public:
 
 private:
     int inputSize;
-
-    Mat dilatation(Mat &image, int inputSize);
 };
 
 

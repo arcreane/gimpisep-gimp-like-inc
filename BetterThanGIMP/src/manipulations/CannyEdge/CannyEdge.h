@@ -17,8 +17,6 @@ private:
     int threshold1;
     int threshold2;
     int kernelSize;
-
-    Mat cannyEdge(Mat &image, int threshold1, int threshold2, int blurKernelSize);
 };
 
 

@@ -26,15 +26,12 @@ Blur::Blur(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(sliderBlurKernelSize);
 }
 
-Mat Blur::blur(Mat &image, int kernelSize) {
-    if (kernelSize > 0) {
+Mat Blur::applyManipulation() {
+    if (this->blurKernelSize > 0) {
         Mat result;
-        GaussianBlur(image, result, Size(kernelSize, kernelSize), 0, BORDER_DEFAULT);
+        GaussianBlur(this->imageSavedInMemory, result, Size(this->blurKernelSize, this->blurKernelSize), 0,
+                     BORDER_DEFAULT);
         return result;
     }
-    return image;
-}
-
-Mat Blur::applyManipulation() {
-    return blur(this->imageSavedInMemory, this->blurKernelSize);
+    return this->imageSavedInMemory;
 };

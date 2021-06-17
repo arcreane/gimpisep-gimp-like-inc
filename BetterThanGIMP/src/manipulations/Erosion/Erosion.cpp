@@ -27,16 +27,11 @@ Erosion::Erosion(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(sliderErosionInput);
 }
 
-Mat Erosion::erosion(Mat &image, int inputSize) {
-
+Mat Erosion::applyManipulation() {
     Mat imageDestination;
-    Size erosionSize = Size(inputSize, inputSize);
+    Size erosionSize = Size(this->inputSize, this->inputSize);
     Mat kernel = getStructuringElement(MORPH_ERODE, erosionSize);
-    erode(image, imageDestination, kernel);
+    erode(this->imageSavedInMemory, imageDestination, kernel);
 
     return imageDestination;
-}
-
-Mat Erosion::applyManipulation() {
-    return erosion(this->imageSavedInMemory, this->inputSize);
 };

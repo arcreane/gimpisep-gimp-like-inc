@@ -70,7 +70,7 @@ void Window::setCurrentManipulation(Manipulation *manipulation) {
     }
 
     if (!this->image.empty() || manipulation->getName() == "Panorama") {
-        std::cout << "Set current manipulation on :" << manipulation->getName() << std::endl;
+        std::cout << "Set current manipulation on: " << manipulation->getName() << std::endl;
         this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
                                                   QString::fromUtf8(manipulation->getName().c_str()));
 

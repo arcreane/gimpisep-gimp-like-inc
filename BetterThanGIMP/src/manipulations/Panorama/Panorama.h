@@ -19,8 +19,6 @@ public:
     Mat applyManipulation() override;
 
 private:
-    Mat stitch(std::vector<Mat> images_to_stitch);
-
     bool crop_after_stitching(Mat &image, Mat &output);
 
     bool checkBlackRow(const Mat &gray_image, int y, const Rect &outputRect);

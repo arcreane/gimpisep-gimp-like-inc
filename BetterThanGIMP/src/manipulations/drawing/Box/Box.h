@@ -15,8 +15,6 @@ public:
 
 private:
     cv::Point startCorner;
-
-    Mat drawBox(Mat &onImage, Point startCorner, Point end, int brushSize, Scalar color);
 };
 
 

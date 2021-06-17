@@ -84,36 +84,6 @@ void Panorama::displayImagesThumbnails() {
 
 }
 
-/* Cree un panorama a partir d'un vecteur d'images */
-Mat Panorama::stitch(vector<Mat> images_to_stitch) {
-
-    // Initialise le panorama qui sera le resultat
-    Mat panorama;
-    Mat panorama_cropped;
-
-    // Cree le Stitcher qui permettra d'assembler les images pour creer le panorama
-    Ptr<Stitcher> stitcher = Stitcher::create(Stitcher::PANORAMA);
-
-    // Assemble les images pour creer le panorama
-    Stitcher::Status status = stitcher->stitch(images_to_stitch, panorama);
-    // Verifie que l'assemblage et la construction du panorama s'est bien deroule
-    if (status != Stitcher::OK) {
-        cout << "An error occured while stitching the images! Error: " << int(status) << endl;
-        QMessageBox error;
-        error.setText("Can't perform requested manipulation on the current image!");
-        error.exec();
-        Mat empty;
-        return empty;
-    }
-
-    // Retourne le panorama resultant
-    if (this->mustBeCropped) {
-        crop_after_stitching(panorama, panorama_cropped);
-        return panorama_cropped;
-    }
-    return panorama;
-}
-
 // Rogne le panorama apres sa construction pour retirer les eventuels bords noirs
 bool Panorama::crop_after_stitching(Mat &image, Mat &output) {
 
@@ -209,7 +179,32 @@ bool Panorama::checkBlackColumn(const Mat &gray_image, int x, const Rect &output
 }
 
 Mat Panorama::applyManipulation() {
-    return stitch(images_to_stitch);
+/* Cree un panorama a partir d'un vecteur d'images */
+    // Initialise le panorama qui sera le resultat
+    Mat panorama;
+    Mat panorama_cropped;
+
+    // Cree le Stitcher qui permettra d'assembler les images pour creer le panorama
+    Ptr<Stitcher> stitcher = Stitcher::create(Stitcher::PANORAMA);
+
+    // Assemble les images pour creer le panorama
+    Stitcher::Status status = stitcher->stitch(this->images_to_stitch, panorama);
+    // Verifie que l'assemblage et la construction du panorama s'est bien deroule
+    if (status != Stitcher::OK) {
+        cout << "An error occured while stitching the images! Error: " << int(status) << endl;
+        QMessageBox error;
+        error.setText("Can't perform requested manipulation on the current image!");
+        error.exec();
+        Mat empty;
+        return empty;
+    }
+
+    // Retourne le panorama resultant
+    if (this->mustBeCropped) {
+        crop_after_stitching(panorama, panorama_cropped);
+        return panorama_cropped;
+    }
+    return panorama;
 }
 
 void Panorama::onResize() {

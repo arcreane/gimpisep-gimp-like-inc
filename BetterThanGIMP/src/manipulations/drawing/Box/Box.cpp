@@ -25,16 +25,12 @@ Box::Box(Workspace &w) : Drawing(w) {
     });
 }
 
-Mat Box::drawBox(Mat &image, Point startCorner, Point endCorner, int size, Scalar color) {
+Mat Box::applyManipulation() {
     Mat result;
-    image.copyTo(result);
+    this->imageSavedInMemory.copyTo(result);
 
     // Draw the rectangle
-    cv::rectangle(result, startCorner, endCorner, color, size);
+    cv::rectangle(result, this->startCorner, this->mouseCoordinates, Scalar(this->blue, this->green, this->red),
+                  this->brushSize);
     return result;
-}
-
-Mat Box::applyManipulation() {
-    return drawBox(this->imageSavedInMemory, this->startCorner, this->mouseCoordinates, this->brushSize,
-                   Scalar(this->blue, this->green, this->red));
 };

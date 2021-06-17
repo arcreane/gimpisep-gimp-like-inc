@@ -48,22 +48,15 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
         updateImageDisplay();
     });
     this->options->layout()->addWidget(sliderKernelSize);
-
-
-    this->options->setStyleSheet("QWidget{background-color: green;}");
-}
-
-Mat CannyEdge::cannyEdge(Mat &image, int threshold1, int threshold2, int kernelSize) {
-    Mat result, blur;
-    if (kernelSize > 0) {
-        GaussianBlur(image, blur, Size(kernelSize, kernelSize), 0);
-    } else {
-        blur = image;
-    }
-    Canny(blur, result, threshold1, threshold2);
-    return result;
 }
 
 Mat CannyEdge::applyManipulation() {
-    return cannyEdge(this->imageSavedInMemory, this->threshold1, this->threshold2, this->kernelSize);
+    Mat result, blur;
+    if (kernelSize > 0) {
+        GaussianBlur(this->imageSavedInMemory, blur, Size(this->kernelSize, this->kernelSize), 0);
+    } else {
+        blur = this->imageSavedInMemory;
+    }
+    Canny(blur, result, this->threshold1, this->threshold2);
+    return result;
 };

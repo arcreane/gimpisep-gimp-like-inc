@@ -27,16 +27,11 @@ Dilatation::Dilatation(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(sliderDilatationInput);
 }
 
-Mat Dilatation::dilatation(Mat &image, int inputSize) {
-
+Mat Dilatation::applyManipulation() {
     Mat imageDestination;
-    Size dilatationSize = Size(inputSize, inputSize);
+    Size dilatationSize = Size(this->inputSize, this->inputSize);
     Mat kernel = getStructuringElement(MORPH_DILATE, dilatationSize);
-    dilate(image, imageDestination, kernel);
+    dilate(this->imageSavedInMemory, imageDestination, kernel);
 
     return imageDestination;
-}
-
-Mat Dilatation::applyManipulation() {
-    return dilatation(this->imageSavedInMemory, this->inputSize);
 };

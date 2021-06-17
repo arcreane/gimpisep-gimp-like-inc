@@ -17,8 +17,6 @@ public:
 
 private:
     int inputSize;
-
-    Mat erosion(Mat &image, int inputSize);
 };
 
 

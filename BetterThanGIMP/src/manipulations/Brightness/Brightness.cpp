@@ -29,16 +29,12 @@ Brightness::Brightness(Workspace &w) : Manipulation(w) {
 
 }
 
-Mat Brightness::brightness(Mat &image, double percentChange) {
-    percentChange =
-            (percentChange / 100) * 255; // On converti le pourcentage en valeur scalaire (260 blanc et -260 noir)
-    Mat new_image;
-    image.copyTo(new_image);
-    new_image += Scalar(percentChange, percentChange, percentChange);
-    return new_image;
-}
 
 Mat Brightness::applyManipulation() {
-    return brightness(this->imageSavedInMemory, this->percentChange);
-
+    // On converti le pourcentage en valeur scalaire (255 blanc et -255 noir)
+    double percentChange = (this->percentChange / 100) * 255;
+    Mat new_image;
+    this->imageSavedInMemory.copyTo(new_image);
+    new_image += Scalar(percentChange, percentChange, percentChange);
+    return new_image;
 };
