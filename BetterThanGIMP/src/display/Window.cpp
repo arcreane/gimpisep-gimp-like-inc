@@ -19,6 +19,7 @@ Window::Window() {
     connect(this->mainMenu, &MenuBar::onSaveEmitFilePath, this, &Window::exportImage);
     connect(this->mainMenu, &MenuBar::newManipulationSelected, this, &Window::setCurrentManipulation);
     connect(this->mainMenu, &MenuBar::saveOnDisk, this, &Window::saveOnDisk);
+    connect(this->mainMenu, &MenuBar::undoManipulation, this, &Window::undo);
 
     this->manipulationOptionsMenu = new OptionsMenu();
 
@@ -148,5 +149,15 @@ void Window::resizeEvent(QResizeEvent *e) {
             workspace->updateImageDisplay();
         }
     }
+}
 
+void Window::undo() {
+    if (currentManipulation) {
+        delete this->currentManipulation;
+        this->currentManipulation = nullptr;
+        this->manipulationOptionsMenu->removeOptions();
+    }
+    if (!this->image.empty()) {
+        workspace->updateImageDisplay();
+    }
 }

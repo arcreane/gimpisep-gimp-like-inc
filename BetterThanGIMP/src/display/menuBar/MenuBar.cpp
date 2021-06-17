@@ -38,6 +38,10 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
     QMenu *editMenu = this->addMenu(("&Edit"));
     QAction *undoAction = editMenu->addAction("Undo");
+    connect(undoAction, &QAction::triggered, this, [this]() {
+        this->emit undoManipulation();
+    });
+    undoAction->setShortcut(QKeySequence("Ctrl+Z"));
 
     QMenu *manipulationMenu = this->addMenu(("&Manipulation"));
 
