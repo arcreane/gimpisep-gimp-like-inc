@@ -13,7 +13,7 @@ using namespace cv;
 
 Erosion::Erosion(Workspace &w) : Manipulation(w) {
     this->name = "Erosion";
-    this->options->setLayout(new QHBoxLayout());
+    this->options->setLayout(new QVBoxLayout());
 
 
     this->inputSize = 1;

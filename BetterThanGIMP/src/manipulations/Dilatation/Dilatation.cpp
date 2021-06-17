@@ -14,7 +14,7 @@ using namespace cv;
 
 Dilatation::Dilatation(Workspace &w) : Manipulation(w) {
     this->name = "Dilatation";
-    this->options->setLayout(new QHBoxLayout());
+    this->options->setLayout(new QVBoxLayout());
 
 
     this->inputSize = 1;
