@@ -11,6 +11,7 @@
 #include "../../manipulations/Monochrome/Monochrome.h"
 #include "../../manipulations/CannyEdge/CannyEdge.h"
 #include "../../manipulations/Panorama/Panorama.h"
+#include "../../manipulations/Erosion/Erosion.h"
 
 MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
@@ -54,6 +55,10 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
     QAction *expositionAction = filterMenu->addAction("Exposition");
     QAction *erosionAction = filterMenu->addAction("Erosion");
+    connect(erosionAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Erosion(this->workspace));
+    });
+
     QAction *brightnessAction = filterMenu->addAction("Brightness");
     //connect(brightnessAction, &QAction::triggered, this, &MenuBar::brightness);
 
