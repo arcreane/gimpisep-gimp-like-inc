@@ -15,12 +15,12 @@
 class Workspace : public QLabel {
 Q_OBJECT
 private:
-    const cv::Mat &currentImage;
+    const cv::Mat &imageInMemory;
 
     cv::Point convertCoordinatesOnDisplayToCoordinatesOnImage(double xOnDisplayRaw, double yOnDisplayRaw);
 
 public:
-    Workspace(const cv::Mat & imageInMemory);
+    Workspace(const cv::Mat &imageInMemory);
 
     void updateImageDisplay();
 
@@ -30,6 +30,8 @@ public:
 
     void dragEnterEvent(QDragEnterEvent *ev) override;
 
+    void mousePressEvent(QMouseEvent *ev) override;
+    
     void mouseReleaseEvent(QMouseEvent *ev) override;
 
     void mouseMoveEvent(QMouseEvent *ev) override;
@@ -40,6 +42,8 @@ signals:
     void onDropEmitFilePath(QString path);
 
     void mouseMoved(cv::Point coordinates);
+
+    void mousePressed(cv::Point clickCoordinates);
 
     void mouseReleased();
 };

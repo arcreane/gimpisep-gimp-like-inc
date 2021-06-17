@@ -3,6 +3,7 @@
 //
 
 #include <QHBoxLayout>
+
 #include "Manipulation.h"
 
 Manipulation::Manipulation(Workspace &w) : workspace(w) {

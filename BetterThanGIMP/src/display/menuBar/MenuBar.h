@@ -23,12 +23,21 @@ public:
 signals:
 
     void onOpenEmitFilePath(QString path);
+
+    void onSaveEmitFilePath(QString path);
+
     void newManipulationSelected(Manipulation *manipulation);
+
     void saveOnDisk();
 
+
 public slots :
+
     void closeApplication();
+
     void openFile();
+
+    void exportImage();
 };
 
 

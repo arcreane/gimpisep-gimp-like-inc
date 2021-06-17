@@ -5,7 +5,6 @@
 #ifndef BETTERTHANGIMP_CANNYEDGE_H
 #define BETTERTHANGIMP_CANNYEDGE_H
 
-
 #include "../Manipulation.h"
 
 class CannyEdge : public Manipulation {
@@ -17,9 +16,8 @@ public:
 private:
     int threshold1;
     int threshold2;
-    int kernelSize;
-
-    Mat cannyEdge(Mat &image, int threshold1, int threshold2, int blurKernelSize);
+    int blurKernelSize;
+    int sobelKernelSize;
 };
 
 

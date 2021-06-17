@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QFileDialog>
 #include <QScrollArea>
+
 #include "Panorama.h"
 
 using namespace std;
@@ -43,12 +44,11 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
         if (images_to_stitch.size() > 1) {
             this->updateImageDisplay();
         } else {
-            std::cout << "Can't create a panorama out of less than 2 images" << std::endl;
+            cout << "Error: Can't create a panorama out of less than 2 images" << endl;
             QMessageBox error;
             error.setText("Can't create a panorama out of less than 2 images!");
             error.exec();
         }
-
     });
 
     QCheckBox *correctStitching = new QCheckBox(tr("Correct stitching"));
@@ -60,8 +60,6 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
     this->options->layout()->addWidget(correctStitching);
     this->options->layout()->addWidget(applyStitching);
     this->options->layout()->setMargin(0);
-    this->options->setStyleSheet("QWidget{background-color: green;}");
-
 }
 
 void Panorama::displayImagesThumbnails() {
@@ -74,7 +72,7 @@ void Panorama::displayImagesThumbnails() {
     for (Mat image : this->images_to_stitch) {
         Mat tmp;
         QLabel *thumbnail = new QLabel();
-        thumbnail->setMaximumWidth(this->options->width() - 35);
+        thumbnail->setMaximumWidth(this->options->width() - 45);
         cvtColor(image, tmp, COLOR_BGR2RGB);
         QImage qImage = QImage((uchar *) tmp.data, tmp.cols, tmp.rows, tmp.step, QImage::Format_RGB888)
                 .scaled(thumbnail->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -83,35 +81,6 @@ void Panorama::displayImagesThumbnails() {
         this->thumbnails->layout()->setAlignment(thumbnail, Qt::AlignHCenter);
     }
     this->panelThumbnails->setWidget(this->thumbnails);
-
-}
-
-/* Cree un panorama a partir d'un vecteur d'images */
-Mat Panorama::stitch(vector<Mat> images_to_stitch) {
-
-    // Initialise le panorama qui sera le resultat
-    Mat panorama;
-    Mat panorama_cropped;
-
-    // Cree le Stitcher qui permettra d'assembler les images pour creer le panorama
-    Ptr<Stitcher> stitcher = Stitcher::create(Stitcher::PANORAMA);
-
-    // Assemble les images pour creer le panorama
-    Stitcher::Status status = stitcher->stitch(images_to_stitch, panorama);
-    // Verifie que l'assemblage et la construction du panorama s'est bien deroule
-    if (status != Stitcher::OK) {
-        cout << "An error occured while stitching the images! Error: " << int(status) << endl;
-        QMessageBox error;
-        error.setText("Can't perform requested manipulation on the current image!");
-        error.exec();
-    }
-
-    // Retourne le panorama resultant
-    if (this->mustBeCropped) {
-        crop_after_stitching(panorama, panorama_cropped);
-        return panorama_cropped;
-    }
-    return panorama;
 
 }
 
@@ -210,7 +179,32 @@ bool Panorama::checkBlackColumn(const Mat &gray_image, int x, const Rect &output
 }
 
 Mat Panorama::applyManipulation() {
-    return stitch(images_to_stitch);
+/* Cree un panorama a partir d'un vecteur d'images */
+    // Initialise le panorama qui sera le resultat
+    Mat panorama;
+    Mat panorama_cropped;
+
+    // Cree le Stitcher qui permettra d'assembler les images pour creer le panorama
+    Ptr<Stitcher> stitcher = Stitcher::create(Stitcher::PANORAMA);
+
+    // Assemble les images pour creer le panorama
+    Stitcher::Status status = stitcher->stitch(this->images_to_stitch, panorama);
+    // Verifie que l'assemblage et la construction du panorama s'est bien deroule
+    if (status != Stitcher::OK) {
+        cout << "An error occured while stitching the images! Error: " << int(status) << endl;
+        QMessageBox error;
+        error.setText("Can't perform requested manipulation on the current image!");
+        error.exec();
+        Mat empty;
+        return empty;
+    }
+
+    // Retourne le panorama resultant
+    if (this->mustBeCropped) {
+        crop_after_stitching(panorama, panorama_cropped);
+        return panorama_cropped;
+    }
+    return panorama;
 }
 
 void Panorama::onResize() {
