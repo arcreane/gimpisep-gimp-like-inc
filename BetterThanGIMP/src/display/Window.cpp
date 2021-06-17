@@ -72,6 +72,7 @@ void Window::setCurrentManipulation(Manipulation *manipulation)
     {
         this->image = currentManipulation->getImageModified();
         delete this->currentManipulation;
+        workspace->updateImageDisplay();
     }
 
     if (!this->image.empty() || manipulation->getName() == "Panorama")
@@ -80,11 +81,8 @@ void Window::setCurrentManipulation(Manipulation *manipulation)
         this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
                                                   QString::fromUtf8(manipulation->getName().c_str()));
 
-        std::cout << "Set option done" << std::endl;
         this->currentManipulation = manipulation;
         this->currentManipulation->setImageSavedInMemory(this->image);
-
-        workspace->updateImageDisplay();
     }
     else
     {
