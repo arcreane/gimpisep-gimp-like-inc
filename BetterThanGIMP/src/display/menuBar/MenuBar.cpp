@@ -14,6 +14,7 @@
 #include "../../manipulations/Blur/Blur.h"
 #include "../../manipulations/Erosion/Erosion.h"
 #include "../../manipulations/Dilatation/Dilatation.h"
+#include "../../manipulations/Contrast/Contrast.h"
 
 MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
 
@@ -56,7 +57,9 @@ MenuBar::MenuBar(Workspace &workspace) : workspace(workspace) {
     });
 
     QAction *contrastAction = manipulationMenu->addAction("Contrast");
-    //connect(contrastAction, SLOT(triggered()), this, SLOT(applyTransformation(image_to_bright)));
+    connect(contrastAction, &QAction::triggered, this, [this]() {
+        this->emit newManipulationSelected(new Contrast(this->workspace));
+    });
 
     QAction *erosionAction = manipulationMenu->addAction("Erosion");
     connect(erosionAction, &QAction::triggered, this, [this]() {
