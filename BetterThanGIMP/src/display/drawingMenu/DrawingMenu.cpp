@@ -13,17 +13,17 @@
 DrawingMenu::DrawingMenu(Workspace &workspace) {
     this->setLayout(new QVBoxLayout());
 
-    QPushButton *circleButton = new QPushButton("Draw Circle");
+    QPushButton *circleButton = new QPushButton("Circle");
     connect(circleButton, &QPushButton::pressed, this, [this, &workspace]() {
         this->emit newManipulationSelected(new Circle(workspace));
     });
 
-    QPushButton *boxButton = new QPushButton("Draw Box");
+    QPushButton *boxButton = new QPushButton("Box");
     connect(boxButton, &QPushButton::pressed, this, [this, &workspace]() {
         this->emit newManipulationSelected(new Box(workspace));
     });
 
-    QPushButton *brushButton = new QPushButton("Draw with brush");
+    QPushButton *brushButton = new QPushButton("Brush");
     connect(brushButton, &QPushButton::pressed, this, [this, &workspace]() {
         this->emit newManipulationSelected(new Brush(workspace));
     });

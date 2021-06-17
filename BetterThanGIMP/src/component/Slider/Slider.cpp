@@ -46,6 +46,6 @@ QSlider *Slider::getSlider() {
     return this->slider;
 }
 
-void Slider::setCurrentValue(int newValue) {
+void Slider::setCurrentValue(double newValue) {
     this->currentValue->setText(QString::number(newValue));
 }
