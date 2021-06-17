@@ -112,6 +112,7 @@ void Window::exportImage(QString path) {
         error.setText("There is no image to be saved!");
         error.exec();
     }
+    
     if (!this->image.empty()) {
         if (currentManipulation != nullptr) {
             this->image = currentManipulation->applyManipulation();
@@ -153,9 +154,7 @@ void Window::resizeEvent(QResizeEvent *e) {
 
 void Window::undo() {
     if (currentManipulation) {
-        delete this->currentManipulation;
-        this->currentManipulation = nullptr;
-        this->manipulationOptionsMenu->removeOptions();
+        this->currentManipulation->setImageSavedInMemory(this->image);
     }
     if (!this->image.empty()) {
         workspace->updateImageDisplay();
