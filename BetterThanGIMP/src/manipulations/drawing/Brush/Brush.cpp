@@ -11,11 +11,6 @@ using namespace cv;
 
 Brush::Brush(Workspace &w) : Drawing(w) {
     this->name = "Brush";
-
-    connect(&this->workspace, &Workspace::mouseMoved, this, [this](Point coordinates) {
-        this->mouseCoordinates = coordinates;
-        this->updateImageDisplay();
-    });
 }
 
 Mat Brush::applyManipulation() {

@@ -8,26 +8,15 @@
 
 Circle::Circle(Workspace &w) : Drawing(w) {
     this->name = "Circle";
-
+    
     connect(&this->workspace, &Workspace::mousePressed, this, [this](Point coordinates) {
         this->center = coordinates;
-    });
-
-    connect(&this->workspace, &Workspace::mouseMoved, this, [this](Point coordinates) {
-        this->mouseCoordinates = coordinates;
-        this->updateImageDisplay();
-    });
-
-
-    connect(&this->workspace, &Workspace::mouseReleased, this, [this]() {
-        //TODO Implement memory saving in a more elegant way
-        this->imageSavedInMemory = applyManipulation();
     });
 }
 
 Mat Circle::applyManipulation() {
     Mat result;
-    this->imageSavedInMemory.copyTo(result);
+    this->imageBeforeNextDrawing.copyTo(result);
 
     // Calculate radius of the circle
     float radius = sqrt(pow(this->center.x - this->mouseCoordinates.x, 2) +
