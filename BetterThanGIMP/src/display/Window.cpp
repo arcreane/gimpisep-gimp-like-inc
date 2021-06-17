@@ -28,11 +28,12 @@ Window::Window() {
     this->setLayout(layout);
     layout->setMenuBar(mainMenu);
 
-    layout->addWidget(drawingMenu, 10);
-    layout->addWidget(workspace, 60);
-    layout->addWidget(manipulationOptionsMenu, 30);
-
     this->setMinimumSize(1280, 720);
+
+    layout->addWidget(drawingMenu, 1);
+    layout->addWidget(workspace, 7);
+    layout->addWidget(manipulationOptionsMenu, 2);
+
 
     this->setStyleSheet(
             "QWidget{background-color:#C0C0C0;}");
@@ -133,6 +134,10 @@ void Window::exportImage(QString path) {
 }
 
 void Window::resizeEvent(QResizeEvent *e) {
+    this->drawingMenu->setFixedWidth(this->width() / 10);
+    this->workspace->setFixedWidth(6 * this->width() / 10);
+    this->manipulationOptionsMenu->setFixedWidth(2.5 * this->width() / 10);
+
     if (currentManipulation) {
         currentManipulation->onResize();
     }
@@ -143,4 +148,5 @@ void Window::resizeEvent(QResizeEvent *e) {
             workspace->updateImageDisplay();
         }
     }
+
 }

@@ -23,7 +23,7 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     QWidget *thresholdSliders = new QWidget();
     thresholdSliders->setLayout(new QHBoxLayout());
 
-    Slider *sliderThreshold1 = new Slider("Threshold 1", Qt::Vertical, 0, 1000, this->threshold1);
+    Slider *sliderThreshold1 = new Slider("Threshold 1", Qt::Vertical, 0, 500, this->threshold1);
     connect(sliderThreshold1->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold1](int val) {
         this->threshold1 = val;
         sliderThreshold1->setCurrentValue(this->threshold1);
@@ -31,7 +31,7 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     });
     thresholdSliders->layout()->addWidget(sliderThreshold1);
 
-    Slider *sliderThreshold2 = new Slider("Threshold 2", Qt::Vertical, 0, 1000, this->threshold2);
+    Slider *sliderThreshold2 = new Slider("Threshold 2", Qt::Vertical, 0, 500, this->threshold2);
     connect(sliderThreshold2->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold2](int val) {
         this->threshold2 = val;
         sliderThreshold2->setCurrentValue(this->threshold2);

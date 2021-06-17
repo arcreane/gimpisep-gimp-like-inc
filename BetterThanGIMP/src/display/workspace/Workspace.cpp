@@ -14,9 +14,8 @@ Workspace::Workspace(const Mat &currentImage) : imageInMemory(currentImage) {
     this->setText("You can drag and drop your image here !");
     this->setAcceptDrops(true);
 
-
     this->setStyleSheet(
-            "QLabel{border-left: 2px solid black; border-right: 2px solid black;border-radius: 0; font-size: 20px; color: grey}");
+            "QLabel{background-color:grey; font-size: 20px; color: #C0C0C0}");
 }
 
 void Workspace::updateImageDisplay() {
