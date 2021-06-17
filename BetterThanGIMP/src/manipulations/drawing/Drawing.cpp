@@ -1,17 +1,13 @@
 //
-// Created by Hugues Baratgin on 16/06/2021.
+// Created by Hugues Baratgin on 17/06/2021.
 //
 
-
-#include <opencv2/opencv.hpp>
-#include <QHBoxLayout>
-#include "Brush.h"
+#include "Drawing.h"
+#include <QVBoxLayout>
+#include <QSlider>
 #include "../../component/Slider/Slider.h"
 
-using namespace cv;
-
-Brush::Brush(Workspace &w) : Manipulation(w) {
-    this->name = "Brush";
+Drawing::Drawing(Workspace &w) : Manipulation(w) {
     this->options->setLayout(new QVBoxLayout);
 
     this->brushSize = 10;
@@ -19,10 +15,6 @@ Brush::Brush(Workspace &w) : Manipulation(w) {
     this->green = 0;
     this->red = 0;
 
-    connect(&this->workspace, &Workspace::mouseMoved, this, [this](Point coordinates) {
-        this->coordinates = coordinates;
-        this->updateImageDisplay();
-    });
 
     Slider *brushSizeSlider = new Slider("Brush size", Qt::Horizontal, 5, 100, this->brushSize);
     connect(brushSizeSlider->getSlider(), &QSlider::valueChanged, this, [this, brushSizeSlider](int val) {
@@ -54,19 +46,6 @@ Brush::Brush(Workspace &w) : Manipulation(w) {
     });
     colorSelection->layout()->addWidget(redSlider);
 
-
     this->options->layout()->addWidget(brushSizeSlider);
     this->options->layout()->addWidget(colorSelection);
 }
-
-Mat Brush::draw(Mat &image, Point coord, int size, Scalar color) {
-    Mat result;
-    image.copyTo(result);
-    circle(result, coord, size, color, FILLED);
-    return result;
-}
-
-Mat Brush::applyManipulation() {
-    return draw(this->imageModified, this->coordinates, this->brushSize,
-                Scalar(this->blue, this->green, this->red));
-};
