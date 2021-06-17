@@ -15,7 +15,7 @@ Q_OBJECT
 public:
     Panorama(Workspace &);
 
-    Mat applyManipulation();
+    Mat applyManipulation() override;
 
 private:
     Mat stitch(std::vector<Mat> images_to_stitch);

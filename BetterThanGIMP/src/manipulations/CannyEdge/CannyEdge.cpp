@@ -19,7 +19,7 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     this->threshold2 = 0;
     this->kernelSize = 0;
 
-    Slider *sliderThreshold1 = new Slider("Threshold 1", 0, 1000, this->threshold1);
+    Slider *sliderThreshold1 = new Slider("Threshold 1", Qt::Vertical, 0, 1000, this->threshold1);
     connect(sliderThreshold1->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold1](int val) {
         this->threshold1 = val;
         sliderThreshold1->setCurrentValue(this->threshold1);
@@ -27,7 +27,7 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     });
     this->options->layout()->addWidget(sliderThreshold1);
 
-    Slider *sliderThreshold2 = new Slider("Threshold 2", 0, 1000, this->threshold2);
+    Slider *sliderThreshold2 = new Slider("Threshold 2", Qt::Vertical, 0, 1000, this->threshold2);
     connect(sliderThreshold2->getSlider(), &QSlider::valueChanged, this, [this, sliderThreshold2](int val) {
         this->threshold2 = val;
         sliderThreshold2->setCurrentValue(this->threshold2);
@@ -35,7 +35,7 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     });
     this->options->layout()->addWidget(sliderThreshold2);
 
-    Slider *sliderKernelSize = new Slider("Blur Kernel Size", -1, 10, this->kernelSize, -1);
+    Slider *sliderKernelSize = new Slider("Blur Kernel Size", Qt::Vertical, -1, 10, this->kernelSize, -1);
     connect(sliderKernelSize->getSlider(), &QSlider::valueChanged, this, [this, sliderKernelSize](int val) {
         val = val < 0 ? 0 : val * 2 + 1;
         this->kernelSize = val;

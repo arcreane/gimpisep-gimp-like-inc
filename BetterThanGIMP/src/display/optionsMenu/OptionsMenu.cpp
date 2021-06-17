@@ -19,8 +19,6 @@ OptionsMenu::OptionsMenu() {
 
     this->layout->addWidget(this->title);
     this->layout->addWidget(currentOptions);
-
-    this->setStyleSheet("QWidget{background-color: orange;}");
 }
 
 void OptionsMenu::setOptions(QWidget *options, QString manipulationName) {
@@ -35,4 +33,3 @@ void OptionsMenu::removeOptions() {
     delete this->currentOptions;
     this->currentOptions = nullptr;
 }
-
