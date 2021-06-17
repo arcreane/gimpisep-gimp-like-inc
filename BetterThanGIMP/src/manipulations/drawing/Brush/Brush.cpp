@@ -22,9 +22,6 @@ Mat Brush::draw(Mat &image, Point coord, int size, Scalar color) {
     Mat result;
     image.copyTo(result);
     circle(result, coord, size, color, FILLED);
-    if(result.empty()){
-        std::cout << "EMPTY" << std::endl;
-    }
     return result;
 }
 

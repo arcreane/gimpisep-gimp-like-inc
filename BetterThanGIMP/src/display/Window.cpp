@@ -45,9 +45,9 @@ void Window::loadImageFromString(QString path) {
         std::string filePath = path.toUtf8().constData();
         cv::Mat temp = cv::imread(filePath);
         if (temp.empty()) {
-            std::cout << "Error loading image" << std::endl;
+            std::cout << "Error: The image can't be loaded" << std::endl;
             QMessageBox error;
-            error.setText("An error has occured");
+            error.setText("An error has occurred on the image loading!");
             error.exec();
         } else {
             if (currentManipulation) {
@@ -70,7 +70,7 @@ void Window::setCurrentManipulation(Manipulation *manipulation) {
     }
 
     if (!this->image.empty() || manipulation->getName() == "Panorama") {
-        std::cout << manipulation->getName() << std::endl;
+        std::cout << "Set current manipulation on :" << manipulation->getName() << std::endl;
         this->manipulationOptionsMenu->setOptions(manipulation->getOptions(),
                                                   QString::fromUtf8(manipulation->getName().c_str()));
 
@@ -88,7 +88,7 @@ void Window::setCurrentManipulation(Manipulation *manipulation) {
 
 void Window::saveOnDisk() {
     if (this->image.empty()) {
-        std::cout << "No image" << std::endl;
+        std::cout << "Error: No image to save" << std::endl;
         QMessageBox error;
         error.setText("There is no image to be saved!");
         error.exec();
@@ -97,8 +97,7 @@ void Window::saveOnDisk() {
         if (currentManipulation != nullptr) {
             this->image = currentManipulation->applyManipulation();
         }
-        imwrite("saved.png", this->image);
-        //TODO sauver l'image dans un dossier
+        imwrite("output.png", this->image);
     }
 }
 
@@ -106,7 +105,7 @@ void Window::saveOnDisk() {
 void Window::exportImage(QString path) {
 
     if (this->image.empty()) {
-        std::cout << "No image" << std::endl;
+        std::cout << "Error: No image to save" << std::endl;
         QMessageBox error;
         error.setText("There is no image to be saved!");
         error.exec();
@@ -118,20 +117,19 @@ void Window::exportImage(QString path) {
         std::string filePath = path.toUtf8().constData();
 
         if (filePath == "") {
-            std::cout << "No path" << std::endl;
+            std::cout << "Error: No path" << std::endl;
             QMessageBox error;
-            error.setText("You must specify a path to store the image");
+            error.setText("You must specify a path to store the image!");
             error.exec();
         } else if (filePath.find('.') == -1) {
-            std::cout << "No extension" << std::endl;
+            std::cout << "Error: No extension" << std::endl;
             QMessageBox error;
-            error.setText("You must specify an extension for the image");
+            error.setText("You must specify an extension for the image!");
             error.exec();
         } else {
             imwrite(filePath, this->image);
         }
     }
-
 }
 
 void Window::resizeEvent(QResizeEvent *e) {

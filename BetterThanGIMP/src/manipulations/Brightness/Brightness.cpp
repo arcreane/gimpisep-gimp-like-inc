@@ -39,7 +39,6 @@ Mat Brightness::brightness(Mat &image, double percentChange) {
 }
 
 Mat Brightness::applyManipulation() {
-    std::cout << this->percentChange << std::endl;
     return brightness(this->imageSavedInMemory, this->percentChange);
 
 };

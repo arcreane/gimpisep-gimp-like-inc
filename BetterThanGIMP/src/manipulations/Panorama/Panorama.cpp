@@ -44,7 +44,7 @@ Panorama::Panorama(Workspace &w) : Manipulation(w) {
         if (images_to_stitch.size() > 1) {
             this->updateImageDisplay();
         } else {
-            std::cout << "Can't create a panorama out of less than 2 images" << std::endl;
+            cout << "Error: Can't create a panorama out of less than 2 images" << endl;
             QMessageBox error;
             error.setText("Can't create a panorama out of less than 2 images!");
             error.exec();
