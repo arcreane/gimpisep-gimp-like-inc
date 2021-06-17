@@ -17,7 +17,6 @@ public:
 
     void removeOptions();
 
-
 private:
     QVBoxLayout *layout;
     QWidget *currentOptions;
