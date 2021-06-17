@@ -16,7 +16,8 @@ public:
 private:
     int threshold1;
     int threshold2;
-    int kernelSize;
+    int blurKernelSize;
+    int sobelKernelSize;
 };
 
 

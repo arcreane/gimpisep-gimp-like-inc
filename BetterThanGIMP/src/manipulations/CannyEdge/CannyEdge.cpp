@@ -17,7 +17,8 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
     //We initialize our parameters
     this->threshold1 = 0;
     this->threshold2 = 0;
-    this->kernelSize = 0;
+    this->blurKernelSize = 0;
+    this->sobelKernelSize = 3;
 
     QWidget *thresholdSliders = new QWidget();
     thresholdSliders->setLayout(new QHBoxLayout());
@@ -40,23 +41,32 @@ CannyEdge::CannyEdge(Workspace &w) : Manipulation(w) {
 
     this->options->layout()->addWidget(thresholdSliders);
 
-    Slider *sliderKernelSize = new Slider("Blur Kernel Size", Qt::Horizontal, -1, 10, this->kernelSize, -1);
-    connect(sliderKernelSize->getSlider(), &QSlider::valueChanged, this, [this, sliderKernelSize](int val) {
+    Slider *sliderBlurKernelSize = new Slider("Blur Kernel Size", Qt::Horizontal, -1, 10, this->blurKernelSize, -1);
+    connect(sliderBlurKernelSize->getSlider(), &QSlider::valueChanged, this, [this, sliderBlurKernelSize](int val) {
         val = val < 0 ? 0 : val * 2 + 1;
-        this->kernelSize = val;
-        sliderKernelSize->setCurrentValue(this->kernelSize);
+        this->blurKernelSize = val;
+        sliderBlurKernelSize->setCurrentValue(this->blurKernelSize);
         updateImageDisplay();
     });
-    this->options->layout()->addWidget(sliderKernelSize);
+    this->options->layout()->addWidget(sliderBlurKernelSize);
+
+    Slider *sliderSobelKernelSize = new Slider("Sobel Kernel Size", Qt::Horizontal, 1, 3, 3, -2);
+    connect(sliderSobelKernelSize->getSlider(), &QSlider::valueChanged, this, [this, sliderSobelKernelSize](int val) {
+        val = val * 2 + 1;
+        this->sobelKernelSize = val;
+        sliderSobelKernelSize->setCurrentValue(this->sobelKernelSize);
+        updateImageDisplay();
+    });
+    this->options->layout()->addWidget(sliderSobelKernelSize);
 }
 
 Mat CannyEdge::applyManipulation() {
     Mat result, blur;
-    if (kernelSize > 0) {
-        GaussianBlur(this->imageSavedInMemory, blur, Size(this->kernelSize, this->kernelSize), 0);
+    if (blurKernelSize > 0) {
+        GaussianBlur(this->imageSavedInMemory, blur, Size(this->blurKernelSize, this->blurKernelSize), 0);
     } else {
         blur = this->imageSavedInMemory;
     }
-    Canny(blur, result, this->threshold1, this->threshold2);
+    Canny(blur, result, this->threshold1, this->threshold2, this->sobelKernelSize);
     return result;
 };
