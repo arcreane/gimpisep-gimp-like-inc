@@ -18,6 +18,7 @@ protected:
     int green;
     int blue;
     int brushSize;
+    Mat imageBeforeNextDrawing;
 };
 
 

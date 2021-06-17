@@ -10,6 +10,19 @@
 Drawing::Drawing(Workspace &w) : Manipulation(w) {
     this->options->setLayout(new QVBoxLayout);
 
+    connect(&this->workspace, &Workspace::mousePressed, this, [this](Point) {
+        this->imageModified.copyTo(this->imageBeforeNextDrawing);
+    });
+
+    connect(&this->workspace, &Workspace::mouseMoved, this, [this](Point coordinates) {
+        this->mouseCoordinates = coordinates;
+        this->updateImageDisplay();
+    });
+
+    connect(&this->workspace, &Workspace::mouseReleased, this, [this]() {
+        this->imageBeforeNextDrawing = applyManipulation();
+    });
+
     this->brushSize = 10;
     this->blue = 0;
     this->green = 0;

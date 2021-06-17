@@ -30,6 +30,8 @@ signals:
 
     void saveOnDisk();
 
+    void undoManipulation();
+
 
 public slots :
 

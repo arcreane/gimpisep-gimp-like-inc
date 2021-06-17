@@ -40,6 +40,8 @@ private slots :
 
     void exportImage(QString path);
 
+    void undo();
+
 public:
     Window();
 };
