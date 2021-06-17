@@ -29,9 +29,8 @@ Brightness::Brightness(Workspace &w) : Manipulation(w) {
 
 }
 
-
 Mat Brightness::applyManipulation() {
-    // On converti le pourcentage en valeur scalaire (255 blanc et -255 noir)
+    // On convertit le pourcentage en valeur scalaire (255 blanc et -255 noir)
     double percentChange = (this->percentChange / 100) * 255;
     Mat new_image;
     this->imageSavedInMemory.copyTo(new_image);
