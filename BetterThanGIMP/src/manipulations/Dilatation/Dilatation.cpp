@@ -11,7 +11,7 @@
 using namespace cv;
 
 Dilatation::Dilatation(Workspace &w) : Manipulation(w){
-    this->name = "Erosion";
+    this->name = "Dilatation";
     this->options->setLayout(new QHBoxLayout());
 
 
