@@ -108,7 +108,7 @@ void MenuBar::exportImage() {
     QString selectedFilter;
     path = QFileDialog::getSaveFileName(nullptr, "Export as", "/",
                                         "PNG (*.png);; "
-                                        "JPEG (*.jpg, *.jpeg);;"
+                                        "JPEG (*.jpg *.jpeg);;"
                                         "BMP (*.bmp);;"
                                         "JFIF (*.jfif);;"
                                         "All files (*.*);;",
