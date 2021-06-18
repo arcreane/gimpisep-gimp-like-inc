@@ -15,7 +15,7 @@ public:
     Mat applyManipulation() override;
 
 private:
-    double percentChange;
+    double contrastFactor;
 
 };
 

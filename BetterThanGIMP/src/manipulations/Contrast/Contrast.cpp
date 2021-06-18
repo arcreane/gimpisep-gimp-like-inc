@@ -16,10 +16,10 @@ Contrast::Contrast(Workspace &w) : Manipulation(w) {
     this->options->setLayout(new QHBoxLayout());
 
     //We initialize our parameters
-    this->percentChange = 1;
+    this->contrastFactor = 1;
 
     int RANGE = 200;
-    Slider *sliderContrast = new Slider("Contrast level", Qt::Vertical, -RANGE, RANGE, this->percentChange, -1);
+    Slider *sliderContrast = new Slider("Contrast level", Qt::Vertical, -RANGE, RANGE, this->contrastFactor, -1);
     connect(sliderContrast->getSlider(), &QSlider::valueChanged, this, [this, sliderContrast, RANGE](int val) {
         double value = val;
         if (val > 0) {
@@ -29,8 +29,8 @@ Contrast::Contrast(Workspace &w) : Manipulation(w) {
         } else {
             value = 1;
         }
-        this->percentChange = value;
-        sliderContrast->setCurrentValue(this->percentChange);
+        this->contrastFactor = value;
+        sliderContrast->setCurrentValue(this->contrastFactor);
         updateImageDisplay();
     });
     this->options->layout()->addWidget(sliderContrast);
@@ -39,6 +39,6 @@ Contrast::Contrast(Workspace &w) : Manipulation(w) {
 
 Mat Contrast::applyManipulation() {
     Mat new_image;
-    this->imageSavedInMemory.convertTo(new_image, -1, this->percentChange);
+    this->imageSavedInMemory.convertTo(new_image, -1, this->contrastFactor);
     return new_image;
 };

@@ -34,7 +34,6 @@ private:
     std::vector<Mat> images_to_stitch;
     QWidget *thumbnails;
     QScrollArea *panelThumbnails;
-
 };
 
 
